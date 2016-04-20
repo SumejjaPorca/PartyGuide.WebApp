@@ -13,6 +13,11 @@
                 controller: 'LoginCtrl',
                 templateUrl: 'app/components/account/login/login.tmpl.html'
             })
+			.state('eConfirm', {
+                url: '/emailConfirmation/{code}',
+                controller: 'eConfirmCtrl',
+                templateUrl: 'app/components/account/eConfirm/eConfirm.tmpl.html'
+            })
 			.state('register', {
                 url: '/register',
                 templateUrl: 'app/components/account/register/register.tmpl.html',

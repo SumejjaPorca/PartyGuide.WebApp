@@ -10,6 +10,20 @@
 
 		var currentUser = { username: null, token: null, isLoggedIn: false };
 
+				this.confirmEmail = function(code){
+					$http({
+							url: serverName + '/api/user/confirm-email',
+							method: "POST",
+							data: 'code=' + code
+					}).then(function (response) {
+						 deferred.resolve(currentUser);
+					},
+					function (response) {
+							deferred.reject(response);
+					});
+
+					return deferred.promise;
+				};
 
         this.login = function (loginModel) {
 
