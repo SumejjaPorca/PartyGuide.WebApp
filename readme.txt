@@ -19,13 +19,12 @@ i buildat će se stranica, neke sitne stvari i pokrenuti na localhost:3000 čini
 Što se tiče template-a samog, kodira se u folderu
 src/app
 
-Nove komponente tipa: Songs, Playlists, SongsPlayer, Authors, ... stavljate u src/app/components (logicno), možete vidjeti kako izgleda recimo za account modul otprilike fileovi.
 
 account.less - CSS(Less)
 account.module.js - samo definiranje modula i dependecija
-account.route.js - definiranje rutiranja (ovdje je onaj AngularUI state router, sad sam mu ime zaboravio)
+account.route.js - definiranje rutiranja 
 account.service.js / account.factory.js - samo ime kaze
-account.ctrl.js - samo kontroler 
+account.ctrl.js - samo kontroler
 mogu biti i recimo
 
 user.directive.js - direktiva usera
