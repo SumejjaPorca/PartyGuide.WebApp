@@ -2,10 +2,10 @@
   'use strict';
 
   angular
-    .module('mp')
+    .module('pg')
     .directive('spNavbar', acmeNavbar);
 
-    /** @ngInject 
+    /** @ngInject
      * @author Luka
      */
     function acmeNavbar() {
@@ -21,14 +21,13 @@
 
         function NavbarController($scope, accountService) {
             $scope.links = [
-                { title:'Home', state:'home'},
-                { title:'Playlists', state: 'playlists'}
+                { title:'Home', state:'home'}
             ];
 
             $scope.isLoggedIn = function(){
                 return accountService.isLoggedIn();
             }
-            
+
             $scope.getUser = function(){
                 return accountService.getCurrentUser().username;
             }
