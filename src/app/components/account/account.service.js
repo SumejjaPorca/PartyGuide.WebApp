@@ -11,6 +11,8 @@
 		var currentUser = { username: null, token: null, isLoggedIn: false };
 
 				this.confirmEmail = function(code){
+					var deferred = $q.defer();
+					
 					$http({
 							url: serverName + '/api/user/confirm-email',
 							method: "POST",
