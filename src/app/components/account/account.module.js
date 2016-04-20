@@ -3,6 +3,6 @@
 	"use strict";
 
 	angular
-		.module('pg.account', ['LocalStorageModule', 'pg.urls'])
+		.module('pg.account', ['LocalStorageModule', 'pg.urls', 'vcRecaptcha'])
 		.constant('toastr', toastr);
 })();
