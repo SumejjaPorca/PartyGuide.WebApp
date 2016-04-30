@@ -56,8 +56,8 @@
 				}, 1500);
 			}, function(response){
 
-				if(response.data.error_description)
-					toastr.error(response.data.error_description, 'Login failed.');
+				if(response.data.message)
+					toastr.error(response.data.message, 'Login failed.');
 				else
 					toastr.error('Login failed.');
 

@@ -27,24 +27,26 @@
 			}
 
 			accountService.register($scope.newUser).then(function(){
-				toastr.success("Succesful registration.");
+				// tek poslije ovog je mijenjano. ova success poruka, i hendlanje errora
+				toastr.success("Confirmation mail was sent to you", "Succesful registration.");
 
 				$timeout(function(){
 					$state.go('login');
 				}, 1500);
 
 			}, function(response){
+				if(response.data.username)
+					$scope.errors.push("Username: " + response.data.username);
 
-				if(response.data.ModelState[""]){
-					angular.copy(response.data.ModelState[""], $scope.errors);
-					toastr.error("Registratioin error");
-				}
-				else
-					toastr.error(response.statusText, "Registration error");
+				if(response.data.email)
+					$scope.errors.push("Email: " + response.data.email);
+
+				if(response.data.password)
+					$scope.errors.push("Password: " + response.data.password);
+
+				toastr.error(response.data.message,"Registration error.");
 			});
-
 		};
-
 
 		function init(){
 			$scope.newUser = {

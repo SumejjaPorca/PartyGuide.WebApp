@@ -10,7 +10,7 @@
 
                 var authData = localStorageService.get('authorizationData');
                 if (authData && authData.token) {
-                    config.header['x-access-token'] = authData.token;
+                    config.headers['x-access-token'] = authData.token;
                 }
 
                 return config;

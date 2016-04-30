@@ -1,12 +1,12 @@
 /*global angular */
-(function (ng) {
+(function () {
     'use strict';
 
     function throwNoKeyException() {
         throw new Error('You need to set the "key" attribute to your public reCaptcha key. If you don\'t have a key, please get one from https://www.google.com/recaptcha/admin/create');
     }
 
-    var app = ng.module('vcRecaptcha');
+    var app = angular.module('vcRecaptcha');
 
     /**
      * An angular service to wrap the reCaptcha API
@@ -122,7 +122,7 @@
 
 
             // Check if grecaptcha is not defined already.
-            if (ng.isDefined($window.grecaptcha)) {
+            if (angular.isDefined($window.grecaptcha)) {
                 callback();
             }
 
@@ -181,4 +181,4 @@
         }];
     });
 
-}(angular));
+}());

@@ -1,4 +1,4 @@
-(function(){
+	(function(){
 	"use strict";
 
 	angular
@@ -12,7 +12,7 @@
 
 				this.confirmEmail = function(code){
 					var deferred = $q.defer();
-					
+
 					$http({
 							url: serverName + '/api/user/confirm-email',
 							method: "POST",
@@ -34,9 +34,9 @@
             $http({
                 url: serverName + '/api/user/login',
                 method: "POST",
-                data: 'username=' + loginModel.username + '&password=' + loginModel.password
+                data: loginModel
             }).then(function (response) {
-                var data = { token: response.token, username: response.username};
+                var data = { token: response.data.token, username: response.data.username};
                 localStorageService.set('authorizationData', data);
                 setCurrentUser(data);
                 deferred.resolve(currentUser);
