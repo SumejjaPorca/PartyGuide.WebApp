@@ -16,7 +16,7 @@
 					$http({
 							url: serverName + '/api/user/confirm-email',
 							method: "POST",
-							data: 'code=' + code
+							data: { token: code }
 					}).then(function (response) {
 						 deferred.resolve(currentUser);
 					},
@@ -27,6 +27,24 @@
 					return deferred.promise;
 				};
 
+				this.requestreset = function(email){
+					return $http({
+						url: serverName + '/api/user/request-reset-pass',
+						method: "POST",
+						data: { email: email }
+					});
+				};
+
+				this.resetPass = function(resetModel){
+					return $http({
+						url: serverName + '/api/user/reset-pass',
+						method: "POST",
+						data: {
+							token: resetModel.token,
+							password: resetModel.password
+						}
+					})
+				}
         this.login = function (loginModel) {
 
             var deferred = $q.defer();

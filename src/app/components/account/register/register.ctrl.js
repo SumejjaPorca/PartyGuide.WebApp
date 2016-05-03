@@ -35,15 +35,44 @@
 				}, 1500);
 
 			}, function(response){
-				if(response.data.username)
-					$scope.errors.push("Username: " + response.data.username);
+				if(response.data.username){
+					switch (response.data.username) {
+						case "exists":
+							$scope.errors.push("Username already exists.");
+							break;
 
-				if(response.data.email)
-					$scope.errors.push("Email: " + response.data.email);
+						case "required":
+							$scope.errors.push("Username is required.");
+							break;
 
-				if(response.data.password)
-					$scope.errors.push("Password: " + response.data.password);
+						case "minlength":
+							$scope.errors.push("Username is short. Minimal length is 6.");
+							break;
+					}
 
+				}
+				if(response.data.email){
+					switch (response.data.email) {
+						case "exists":
+							$scope.errors.push("Email already exists.");
+							break;
+
+						case "not valid":
+							$scope.errors.push("Email's format isn't valid.");
+							break;
+					}
+				}
+
+				if(response.data.password){
+					switch (response.data.password) {
+						case "required":
+							$scope.errors.push("Password is required.");
+							break;
+						case "weak":
+							$scope.error.push("Password is weak. Password must be minimum 8 char long, and have at least one lowercase and uppercase letter.");
+							break;
+					}
+				}
 				toastr.error(response.data.message,"Registration error.");
 			});
 		};

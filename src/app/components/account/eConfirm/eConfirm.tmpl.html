@@ -1,5 +1,11 @@
 <div>
     <div class="col-md-4 col-md-offset-4">
-        <h2 class="text-center">Email Confirmation</h2>
+        <h2 class="text-center">Email Confirmation.</h2>
+    </div>
+    <div class="col-md-12 alert alert-danger" ng-if="error">
+      <strong>Confirmation error!</strong> {{error}}
+    </div>
+    <div class="col-md-12 alert alert-info" ng-if="confirmation.success">
+      <strong>Confirmation succesful!</strong>
     </div>
 </div>
