@@ -69,7 +69,7 @@
 							$scope.errors.push("Password is required.");
 							break;
 						case "weak":
-							$scope.error.push("Password is weak. Password must be minimum 8 char long, and have at least one lowercase and uppercase letter.");
+							$scope.errors.push("Password is weak. Password must be minimum 8 char long, and have at least one lowercase and uppercase letter.");
 							break;
 					}
 				}
