@@ -1,0 +1,19 @@
+
+
+  <div class="col-sm-5">
+    <h4>{{bar.name}} </h4>
+
+      <div class="det-bar">
+        <div class="det-bar-title">{{bar.description}}</div>
+        <div class="det-bar-add">{{bar.location.address}}</div>
+        <div class="det-bar-phone">{{bar.phone}}</div>
+
+        <div class="det-bar-tags">
+          <span class="badge det-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
+        </div>
+
+        <div class="col-sm-5 form-group">
+              <div id="map"></div>
+          </div>
+      </div>
+</div>
