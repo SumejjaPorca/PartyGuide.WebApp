@@ -8,10 +8,19 @@
 	/**@ngInject */
 	function detailsCtrl($scope, accountService, $state, $stateParams, barsService){
 
-    $scope.bar = {name:"Hello", location:{address:""}, tags: []}
+    $scope.bar = {name:"", location:{address:""}, tags: []};
+
+		var mapProp = {
+				center: { Lat: 43.9000, Lng: 17.4 },
+				zoom: 7
+		};
+		//$scope.map = geolocation.instantiateMap("map", mapProp);
+
     barsService.getDetailed($stateParams.id).then(
      function(bar){
-       $scope.bar = bar.data;
+      $scope.bar = bar.data;
+			//$scope.Marker = new geolocation.Marker($scope.map, { lat: $scope.bar.Loc.Lat, lng: $scope.Loc.Long });
+			//$scope.map.panTo($scope.Marker.getPosition());
      }, function(error){
        $scope.message = error.data.message;
      }
