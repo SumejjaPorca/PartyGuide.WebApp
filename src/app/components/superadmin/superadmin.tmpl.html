@@ -1,29 +1,10 @@
 <div class="row">
+
+  <h4>Superadmin panel</h4>
+
   <div class="col-md-12">
     <div class="alert alert-danger" ng-if="error">{{error}}</div>
   </div>
 
-  <h4>Superadmin panel</h4>
-  <div class="container-fluid">
-    <div class="row">
-      <h3>Bars</h3>
-      <div ng-repeat="bar in bars" class="sa-bar-out col-md-6">
-
-        <div class="sa-bar">
-          <div class="sa-bar-title">{{bar.name}}</div>
-          <div class="sa-bar-add">{{bar.location.address}}</div>
-          <div class="sa-bar-tags">
-            <span class="badge sa-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="sa-bar-out col-md-6">
-        <div class="sa-bar-new">
-          <span class="glyphicon glyphicon-plus"></span> Create new bar
-        </div>
-      </div>
-    </div>
-  </div>
+  <div ui-view></div>
 </div>

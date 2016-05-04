@@ -15,6 +15,7 @@
     <div class="collapse navbar-collapse" collapse="navCollapsed">
       <ul class="nav navbar-nav">
         <li ui-sref-active="active" ng-repeat="item in ::links"><a ui-sref="{{::item.state}}">{{::item.title}}</a></li>
+        <li ui-sref-active="superadmin" ng-if="isSuperAdmin()"><a ui-sref="superadmin.bars">SuperAdmin</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-if="!isLoggedIn()">
         <li ui-sref-active="active"><a ui-sref="register">Register</a></li>

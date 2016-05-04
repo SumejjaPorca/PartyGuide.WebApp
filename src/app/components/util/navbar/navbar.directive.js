@@ -31,6 +31,12 @@
             $scope.getUser = function(){
                 return accountService.getCurrentUser().user;
             }
+
+            $scope.isSuperAdmin = function(){
+                return accountService.isSuperAdmin();
+            }
+
+
         }
     }
 

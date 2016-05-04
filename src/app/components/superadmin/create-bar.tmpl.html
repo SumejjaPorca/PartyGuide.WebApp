@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-md-6 col-md-offset-3">
+  		<form name="rForm" ng-submit="create()" class="form-horizontal" novalidate>
+  			<fieldset>
+  				<legend>Create Bar</legend>
+  				<div class="form-group has-error" ng-if="errors">
+  					<p class="col-lg-9 col-lg-offset-3 help-block" ng-repeat="err in errors">{{err}}</p>
+  				</div>
+  				<div class="form-group" ng-class="{'has-error': rForm.name.$invalid && rForm.name.$touched}">
+  					<label for="name" class="col-lg-3 control-label">Name:</label>
+  					<div class="col-lg-9">
+  						<input type="text" class="form-control" ng-model="bar.name"
+  							id="name" name="name" placeholder="Bar's name" required>
+  					</div>
+  					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.name.$invalid && rForm.name.$touched">
+  						<span ng-if="rForm.name.$error.required">Required.</span>
+  					</p>
+  				</div>
+  				<div class="form-group" ng-class="{'has-error': rForm.description.$invalid && rForm.description.$touched}">
+  					<label for="description" class="col-lg-3 control-label">Description:</label>
+  					<div class="col-lg-9" >
+  						<textarea class="form-control" ng-model="bar.description"
+  							id="description" name="description" placeholder="Description"></textarea>
+  					</div>
+  				</div>
+          <div class="form-group" ng-class="{'has-error': rForm.phone.$invalid && rForm.phone.$touched}">
+  					<label for="phone" class="col-lg-3 control-label">Phone:</label>
+  					<div class="col-lg-9">
+  						<input type="text" class="form-control" ng-model="bar.phone"
+  							id="phone" name="phone" placeholder="ex. +38763333222" ng-pattern="/^\+\d{8,13}$/i">
+  					</div>
+  					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.phone.$invalid && rForm.phone.$touched">
+  						<span ng-if="rForm.phone.$error.pattern">Wrong format. (ex. +38760123456)</span>
+  					</p>
+  				</div>
+          <div class="form-group">
+            <h4 class="col-lg-12">Location</h4>
+            <div class="container-fluid">
+
+              <div class="form-group" ng-class="{'has-error': rForm.description.$invalid && rForm.description.$touched}">
+                <label for="address" class="col-lg-3 control-label">Address:</label>
+                <div class="col-lg-9" >
+                  <input type="text" class="form-control" ng-model="bar.location.address"
+                    id="address" name="address" placeholder="ex. Zmaja od Bosne 73, Sarajevo 71000, Bosnia & Herzegovina">
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{'has-error': rForm.description.$invalid && rForm.description.$touched}">
+                <label for="longitude" class="col-lg-3 control-label">Geo:</label>
+                <div class="col-lg-9" >
+                  <div class="form-group">
+                    <div class="col-md-6">
+                      <input type="number" class="form-control" ng-model="bar.location.geo[0]"
+                          id="longitude" name="longitude" placeholder="Longitude">
+                    </div>
+
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" ng-model="bar.location.geo[1]"
+                        id="latitude" name="latitude" placeholder="Latitude">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+  				<div class="form-group">
+  					<div class="col-lg-9 col-lg-offset-3">
+  						<button type="submit" class="btn btn-primary">Create</button>
+  					</div>
+  				</div>
+  			</fieldset>
+  		</form>
+  	</div>
+  </div>
+
+</div>

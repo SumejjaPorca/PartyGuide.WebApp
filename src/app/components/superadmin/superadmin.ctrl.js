@@ -8,14 +8,10 @@
 	/**@ngInject */
 	function superadminCtrl($scope, accountService, toastr, $state, $http, serverName){
 
-    // TODO use bar service
-    $http.get(serverName + '/api/bars').then(function(bars){
-			var bars = bars.data;
-      angular.copy(bars, $scope.bars);
-    });
-
-    $scope.bars = [];
-    $scope.error = ""
+		var user = accountService.getCurrentUser().user;
+		if(!user || !user.superadmin){
+			$state.go('home');
+		}
 
 	}
 

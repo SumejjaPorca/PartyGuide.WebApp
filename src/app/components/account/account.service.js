@@ -122,6 +122,11 @@
 
             return !!c_user && !!c_user.token;
         };
+				this.isSuperAdmin = function(){
+					var user = this.getCurrentUser().user;
+
+					return !(!user || !user.superadmin);
+				}
         var setCurrentUser = function (loginModel) {
             currentUser.token = loginModel.token;
             currentUser.user = loginModel.user;
