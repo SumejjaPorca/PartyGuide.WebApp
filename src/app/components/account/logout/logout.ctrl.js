@@ -3,11 +3,11 @@
 
 	angular
 		.module('pg.account')
-		.controller('LogoutCtrl', loginCtrl);
+		.controller('LogoutCtrl', logoutCtrl);
 
 	/**@ngInject */
-	function loginCtrl($scope, accountService, toastr, $state, $timeout){
-		
+	function logoutCtrl($scope, accountService, toastr, $state, $timeout){
+
 
         accountService.logout();
 

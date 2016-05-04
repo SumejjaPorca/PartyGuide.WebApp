@@ -7,10 +7,16 @@
 		.controller('HomeCtrl', homeCtrl);
 
 		/** @ngInject */
-		function homeCtrl($scope, accountService, $state, toastr){
+		function homeCtrl($scope, accountService, $state, toastr, barsService){
 
-			$scope.clubs = [];
-			            
+			 $scope.bars = [];
+			 barsService.get().then(
+				function(bars){
+					var bars = bars.data;
+		      angular.copy(bars, $scope.bars);
+		    }
+			);
+
     		$scope.isLoggedIn = function(){
                 return accountService.isLoggedIn();
             };

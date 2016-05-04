@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('pg', ['ui.router', 'ui.bootstrap', 'pg.account','pg.superadmin']);
+    .module('pg', ['ui.router', 'ui.bootstrap', 'pg.account','pg.superadmin', 'pg.bars']);
 
 })();

@@ -10,8 +10,7 @@
 <div ng-if="isLoggedIn()">
 
   <div class="row">
-    <h4>Bars</h4>
-    <div ng-repeat="bar in bars" class="sa-bar-out col-md-6">
+    <h4>Bar {{bar.name}} </h4>
 
       <div class="sa-bar">
         <div class="sa-bar-title">{{bar.name}}</div>
@@ -21,7 +20,6 @@
         </div>
       </div>
 
-    </div>
 
   </div>
 
