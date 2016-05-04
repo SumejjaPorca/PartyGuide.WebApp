@@ -9,6 +9,9 @@
 </div>
 <div ng-if="isLoggedIn()">
 
+
+  <div class="container" ui-view></div>
+
   <div class="row">
     <h4>Bars</h4>
     <div ng-repeat="bar in bars" class="sa-bar-out col-md-6">
@@ -19,6 +22,8 @@
         <div class="sa-bar-tags">
           <span class="badge sa-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
         </div>
+      </br>
+      <button class="btn btn-primary btn-md" ng-click="go('bars.details', {id:bar._id})">See more details...</button>
       </div>
 
     </div>

@@ -8,7 +8,7 @@
 	/**@ngInject */
 	function detailsCtrl($scope, accountService, $state, $stateParams, barsService){
 
-    $scope.bar = {name:"", location:{address:""}, tags: []}
+    $scope.bar = {name:"Hello", location:{address:""}, tags: []}
     barsService.getDetailed($stateParams.id).then(
      function(bar){
        $scope.bar = bar.data;

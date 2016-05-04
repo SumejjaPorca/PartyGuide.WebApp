@@ -1,26 +1,15 @@
-<div ng-if="!isLoggedIn()">
-    <div class="col-md-4 col-md-offset-4">
-        <h2 class="text-center">You are not logged in! :(</h2>
-        <button class="btn btn-primary btn-block btn-lg" ng-click="go('register')">Register</button>
-        <h4 class="text-center"><em>- or -</em></h4>
-        <button class="btn btn-primary btn-block btn-lg" ng-click="go('login')">Log in!</button>
 
-    </div>
-</div>
-<div ng-if="isLoggedIn()">
 
-  <div class="row">
-    <h4>Bar {{bar.name}} </h4>
+  <div class="col-sm-5">
+    <h4>{{bar.name}} </h4>
 
-      <div class="sa-bar">
-        <div class="sa-bar-title">{{bar.name}}</div>
-        <div class="sa-bar-add">{{bar.location.address}}</div>
-        <div class="sa-bar-tags">
-          <span class="badge sa-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
+      <div class="det-bar">
+        <div class="det-bar-title">{{bar.description}}</div>
+        <div class="det-bar-add">{{bar.location.address}}</div>
+        <div class="det-bar-phone">{{bar.phone}}</div>
+
+        <div class="det-bar-tags">
+          <span class="badge det-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
         </div>
       </div>
-
-
-  </div>
-
 </div>

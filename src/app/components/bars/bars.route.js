@@ -14,10 +14,11 @@
                 templateUrl: 'app/components/bars/bars/bars.tmpl.html'
             })
 			.state('bars.details', {
-								url: '/bars/{id}',
+								url: '/details/{id}',
 								templateUrl: 'app/components/bars/details/details.tmpl.html',
-								controller: 'barDetailsCtrl'
+								controller: 'barDetailsCtrl',
+                params: { id: null}
 						});
-      
+
 	}
 })();
