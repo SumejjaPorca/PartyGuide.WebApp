@@ -25,19 +25,20 @@
                     $scope.response = null;
                  };
 
-
+		$scope.errors = [];
 		$scope.login = function(){
 
+			angular.copy([], $scope.errors);
       //recaptcha validation
 			var valid;
 			if (valid) {
-											console.log('Success');
-									} else {
-											console.log('Failed validation');
-											// In case of a failed validation you need to reload the captcha
-											// because each response can be checked just once
-											vcRecaptchaService.reload($scope.widgetId);
-									}
+					console.log('Success');
+			} else {
+					console.log('Failed validation');
+					// In case of a failed validation you need to reload the captcha
+					// because each response can be checked just once
+					vcRecaptchaService.reload($scope.widgetId);
+			}
 			//recaptcha validation end
 
 			if($scope.rForm.$invalid){
@@ -54,10 +55,30 @@
 				$timeout(function(){
 					$state.go('home');
 				}, 1500);
-			}, function(response){
 
-				if(response.data.message)
-					toastr.error(response.data.message, 'Login failed.');
+			}).catch(function(response){
+
+				if(response.data.username){
+					if(response.data.username == "wrong"){
+						$scope.errors.push("Username or password is wrong.");
+					}
+					if(response.data.username == "required"){
+						$scope.errors.push("Username is required.");
+					}
+				}
+				if(response.data.password){
+					if(response.data.username == "required"){
+						$scope.errors.push("Username is required.");
+					}
+				}
+				if(response.data.email){
+					if(response.data.email == "not confirmed"){
+						$scope.errors.push("Email isn't confirmed.");
+					}
+				}
+
+				if($scope.errors.length > 0)
+					toastr.error($scope.errors.join(' '), 'Login failed.');
 				else
 					toastr.error('Login failed.');
 

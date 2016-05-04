@@ -29,7 +29,7 @@
             }
 
             $scope.getUser = function(){
-                return accountService.getCurrentUser().username;
+                return accountService.getCurrentUser().user;
             }
         }
     }

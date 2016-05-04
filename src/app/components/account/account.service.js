@@ -8,7 +8,7 @@
 	/** @ngInject */
 	function accountService($http, localStorageService, serverName, $q){
 
-		var currentUser = { username: null, token: null, isLoggedIn: false };
+		var currentUser = { user: null, token: null, isLoggedIn: false };
 
 				this.confirmEmail = function(code){
 					var deferred = $q.defer();
@@ -53,14 +53,29 @@
                 url: serverName + '/api/user/login',
                 method: "POST",
                 data: loginModel
-            }).then(function (response) {
-                var data = { token: response.data.token, username: response.data.username};
+            }).then(function (lResponse) {
+
+							var data = { token: lResponse.data.token };
+							localStorageService.set('authorizationData', data);
+
+							$http({
+	                url: serverName + '/api/user',
+	                method: "GET"
+	            }).then(function(uResponse){
+								var data = { token: lResponse.data.token, user: uResponse.data};
                 localStorageService.set('authorizationData', data);
                 setCurrentUser(data);
                 deferred.resolve(currentUser);
+
+							}, function(response){
+								localStorageService.set('authorizationData', { token: null, user: null });
+								currentUser.IsLoggedIn = false;
+								deferred.reject(response);
+							});
+
             },
             function (response) {
-                localStorageService.set('authorizationData', { token: null, username: null });
+                localStorageService.set('authorizationData', { token: null, user: null });
                 currentUser.IsLoggedIn = false;
                 deferred.reject(response);
             });
@@ -69,9 +84,9 @@
         };
 
         this.logout = function () {
-            localStorageService.set('authorizationData', { token: null, username: null });
-            currentUser.username = null;
-            currentUser.IsLoggedIn = false;
+            localStorageService.set('authorizationData', { token: null, user: null });
+            currentUser.user = null;
+
         };
 
         this.register = function (registerModel) {
@@ -85,8 +100,7 @@
                  deferred.resolve(response);
             },
             function (response) {
-                localStorageService.set('authorizationData', { token: null, username: null });
-                currentUser.IsLoggedIn = false;
+                localStorageService.set('authorizationData', { token: null, user: null });
                 deferred.reject(response);
             });
 
@@ -99,7 +113,7 @@
             {
                 setCurrentUser(data);
             } else{
-                setCurrentUser({token:null, username:null});
+                setCurrentUser({token:null, user:null});
             }
             return currentUser;
         };
@@ -110,7 +124,7 @@
         };
         var setCurrentUser = function (loginModel) {
             currentUser.token = loginModel.token;
-            currentUser.username = loginModel.username;
+            currentUser.user = loginModel.user;
         };
     }
 })();
