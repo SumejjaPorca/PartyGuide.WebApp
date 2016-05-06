@@ -7,13 +7,13 @@
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-repeat="err in errors">{{err}}</p>
 				</div>
 				<div class="form-group" ng-class="{'has-error': rForm.username.$invalid && rForm.username.$touched}">
-					<label for="username" class="col-lg-3 control-label">Username:</label>
+					<label for="username" class="col-lg-3 control-label" translate="USERNAME">Username:</label>
 					<div class="col-lg-9">
 						<input type="text" class="form-control" ng-model="newUser.username"
 							id="username" name="username" placeholder="Username" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.username.$invalid && rForm.username.$touched">
-						<span ng-if="rForm.username.$error.required">Required.</span>
+						<span ng-if="rForm.username.$error.required" translate="REQ">Required.</span>
 					</p>
 				</div>
 				<div class="form-group" ng-class="{'has-error': rForm.email.$invalid && rForm.email.$touched}">
@@ -23,7 +23,7 @@
 							id="inputEmail" name="email" placeholder="Email" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.email.$invalid && rForm.email.$touched">
-						<span ng-if="rForm.email.$error.required">Required.</span>
+						<span ng-if="rForm.email.$error.required" translate="REQ">Required.</span>
 						<span ng-if="rForm.email.$error.email">Email doesn't have valid format.</span>
 					</p>
 				</div>
@@ -34,24 +34,24 @@
 							id="password" name="password" placeholder="Password" required ng-minlength="8">
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.password.$invalid && rForm.password.$touched">
-						<span ng-if="rForm.password.$error.required">Required.</span>
-						<span ng-if="rForm.password.$error.minlength">Password need to have at least 8 chars.</span>
+						<span ng-if="rForm.password.$error.required" translate="REQ">Required.</span>
+						<span ng-if="rForm.password.$error.minlength" translate="PS">Password need to have at least 8 chars.</span>
 					</p>
 				</div>
 				<div class="form-group" ng-class="{'has-error': rForm.confirmPassword.$invalid && rForm.confirmPassword.$touched}">
-					<label for="confirmPassword" class="col-lg-3 control-label" >Repeat password:</label>
+					<label for="confirmPassword" class="col-lg-3 control-label" translate="RP" >Repeat password:</label>
 					<div class="col-lg-9">
 						<input type="password" class="form-control" ng-model="newUser.confirmPassword" confirm-password="newUser.password"
 							id="passwordR" name="confirmPassword" placeholder="Repeat password" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.confirmPassword.$invalid && rForm.confirmPassword.$touched">
-						<span ng-if="rForm.confirmPassword.$error.required">Required.</span>
-						<span ng-if="rForm.confirmPassword.$error.confirm">Passwords are not same.</span>
+						<span ng-if="rForm.confirmPassword.$error.required" translate="REQ">Required.</span>
+						<span ng-if="rForm.confirmPassword.$error.confirm" translate="PNS">Passwords are not same.</span>
 					</p>
 				</div>
 				<div class="form-group">
 					<div class="col-lg-9 col-lg-offset-3">
-						<button type="submit" class="btn btn-primary">Register</button>
+						<button type="submit" class="btn btn-primary"translate="REGISTER">Register</button>
 					</div>
 				</div>
 			</fieldset>
