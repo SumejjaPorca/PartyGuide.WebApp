@@ -1,41 +1,78 @@
+@det-bar-bg: darken(@gray-lighter,3%);
+@det-bar-cl: @gray;
 .det-bar-out{
   padding: 6px;
 }
+
 .det-bar{
-  background-color: @gray-light;
+  background-color: @det-bar-bg;
   padding: 12px 16px;
-  color: darken(white,5%);
+  color: @det-bar-cl;
   margin-bottom: 12px;
   border-radius: 3px;
   box-shadow: 0px 1px 3px -1px black;
 
-  cursor:pointer;
+  width:750px;
+  margin-left:auto;
+  margin-right:auto;
+
+  .det-bar-title{
+    font-size: 2.1em;
+  }
+
+
+  .det-bar-add, .det-bar-geo, .div-bar-prop-group{
+    font-size: 1em;
+  }
+
+  .div-bar-prop-group{
+    margin: 1em 0 1.5em;
+    header{
+      font-size: 0.85em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.5em;
+    }
+
+  }
+
+  .det-bar-tag{
+    margin-right: 3px;
+    font-size: 1em;
+  }
+
+  header{
+    margin-bottom: 2em;
+  }
+
+  .det-bar-geo{
+    display:inline-block;
+    margin: 0 -3px;
+    padding: 0 3px;
+    cursor:pointer;
+    .glyphicon{
+      color:@brand-primary;
+    }
+    &:hover{
+      box-shadow: 0px 1px 3px -2px black;
+    }
+  }
+  .det-bar-map{
+    margin-left:-16px;
+    margin-right:-16px;
+  }
 }
 
-.det-bar .det-bar-title{
-  font-size: 1.3em;
-}
+@media (max-width: @screen-sm-max){
 
-.det-bar-add{
-  font-size: 0.87em;
-}
-.det-bar-desc{
-  font-size: 0.87em;
-}
-.det-bar-phone{
-  font-size: 0.87em;
-  font-weight: bold;
-}
+  .det-bar {
+    width:100%;
 
-.det-bar-tags{
-  margin-top: 12px;
+    .det-bar-title{
+      font-size: 1.8em;
+    }
+  }
 }
-
-.det-bar-tag{
-  margin-right: 3px;
-  font-size: 1em;
-}
-
 
 .det-bar-new{
   border-style: dashed;

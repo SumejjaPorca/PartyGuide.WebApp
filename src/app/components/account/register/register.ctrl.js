@@ -6,18 +6,22 @@
 		.controller('RegisterCtrl', registerCtrl);
 
 	/**@ngInject */
-	function registerCtrl($scope, accountService, toastr, $state, $timeout){
+	function registerCtrl($scope, accountService, toastr, $state, $timeout, $translate){
 
 		init();
 
 		$scope.errors = [];
-
 		$scope.register = function(){
 
 			angular.copy([], $scope.errors);
 
 			if($scope.rForm.$invalid){
-				toastr.error('Check form fields, some of them are invalid!', 'Invalid form' );
+				$translate(['REG.CHECK_FIELDS','REG.INVALID_FORM']).then(function(trans){
+					toastr.error(trans['REG.CHECK_FIELDS'], trans['REG.INVALID_FORM']);
+				}).catch(function(err){
+					console.log(err);
+				});
+
 				$scope.rForm.username.$setTouched();
 				$scope.rForm.email.$setTouched();
 				$scope.rForm.password.$setTouched();
@@ -28,7 +32,11 @@
 
 			accountService.register($scope.newUser).then(function(){
 				// tek poslije ovog je mijenjano. ova success poruka, i hendlanje errora
-				toastr.success("Confirmation mail was sent to you", "Succesful registration.");
+				$translate(['REG.MAIL_SENT','REG.REG_SUCCESSFUL']).then(function(trans){
+					toastr.error(trans['REG.MAIL_SENT'], trans['REG.REG_SUCCESSFUL']);
+				}).catch(function(err){
+					console.log(err);
+				});
 
 				$timeout(function(){
 					$state.go('login');
@@ -38,15 +46,15 @@
 				if(response.data.username){
 					switch (response.data.username) {
 						case "exists":
-							$scope.errors.push("Username already exists.");
+							$translate('REG.USERNAME_EXISTS').then(function(trans){$scope.errors.push(trans);})
 							break;
 
 						case "required":
-							$scope.errors.push("Username is required.");
+							$translate('REG.USERNAME_REQ').then(function(trans){$scope.errors.push(trans);})
 							break;
 
 						case "minlength":
-							$scope.errors.push("Username is short. Minimal length is 6.");
+							$translate('REG.USERNAME_SHORT').then(function(trans){$scope.errors.push(trans);})
 							break;
 					}
 
@@ -54,11 +62,11 @@
 				if(response.data.email){
 					switch (response.data.email) {
 						case "exists":
-							$scope.errors.push("Email already exists.");
 							break;
+							$translate('REG.EMAIL_EXISTS').then(function(trans){$scope.errors.push(trans);})
 
 						case "not valid":
-							$scope.errors.push("Email's format isn't valid.");
+							$translate('REG.EMAIL_NOT_WALID').then(function(trans){$scope.errors.push(trans);})
 							break;
 					}
 				}
@@ -66,14 +74,17 @@
 				if(response.data.password){
 					switch (response.data.password) {
 						case "required":
-							$scope.errors.push("Password is required.");
+							$translate('REG.PASS_REQ').then(function(trans){$scope.errors.push(trans);})
 							break;
 						case "weak":
-							$scope.errors.push("Password is weak. Password must be minimum 8 char long, and have at least one lowercase and uppercase letter.");
+							$translate('REG.PASS_WEAK').then(function(trans){$scope.errors.push(trans);})
 							break;
 					}
 				}
-				toastr.error(response.data.message,"Registration error.");
+				$translate('REG.REG_ERR').then(function(trans){
+					toastr.error(trans);
+				});
+
 			});
 		};
 

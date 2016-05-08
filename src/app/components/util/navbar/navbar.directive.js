@@ -21,7 +21,8 @@
 
         function NavbarController($scope, accountService, translate) {
             $scope.links = [
-                { title:'Home', state:'home'}
+                { title:'Home', state:'home' },
+                { title: 'Bars', state:'bars.list' }
             ];
             $scope.changeLanguage = function (key) {
                translate.use(key);

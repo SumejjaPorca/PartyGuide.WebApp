@@ -3,7 +3,7 @@
 
 	angular
 		.module('pg.bars')
-		.controller('barsCtrl', barsCtrl);
+		.controller('barsListCtrl', barsCtrl);
 
 	/**@ngInject */
 	function barsCtrl($scope, accountService, $state, barsService){

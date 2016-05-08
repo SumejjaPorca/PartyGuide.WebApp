@@ -10,8 +10,13 @@
 		$stateProvider
 			.state('bars', {
                 url: '/bars',
-                controller: 'barsCtrl',
-                templateUrl: 'app/components/bars/bars/bars.tmpl.html'
+                templateUrl: 'app/components/bars/bars.tmpl.html',
+								abstract:true
+            })
+			.state('bars.list', {
+                url: '/',
+                controller: 'barsListCtrl',
+                templateUrl: 'app/components/bars/list/list.tmpl.html'
             })
 			.state('bars.details', {
 								url: '/details/{id}',

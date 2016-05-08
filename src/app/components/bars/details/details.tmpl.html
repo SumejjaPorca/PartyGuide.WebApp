@@ -1,19 +1,37 @@
 
+<div class="container-fluid">
+  <div class="row">
 
-  <div class="col-sm-5">
-    <h4>{{bar.name}} </h4>
+        <div class="det-bar">
+          <header>
+            <div class="det-bar-title">{{bar.name}}</div>
+            <div class="det-bar-add">{{bar.location.address}}</div>
+            <div ng-click="showMap = !showMap" ng-show="bar.location && bar.location.geo" class="det-bar-geo">
+              <span class="glyphicon glyphicon-map-marker"></span>
+              <span ng-show="!showMap" translate="BAR.DET.SHOW_MAP">Show on the map</span>
+              <span ng-show="showMap" translate="BAR.DET.CLOSE_MAP">Close the map</span>
+            </div>
+            <div ng-if="showMap" class="det-bar-map"><h3 id="map">Google Map go here</h3><p>Namjerno je margina pomjerena ulijevo i udesno kako bi slika karte isla od kraja do kraja. Ukoliko bude ruzno ukloniti .det-bar-map iz bars.less.</p></div>
+          </header>
 
-      <div class="det-bar">
-        <div class="det-bar-title">{{bar.description}}</div>
-        <div class="det-bar-add">{{bar.location.address}}</div>
-        <div class="det-bar-phone">{{bar.phone}}</div>
+          <div ng-if="bar.description" class="div-bar-prop-group">
+            <header>Description</header>
+            <div>{{bar.description}}</div>
+          </div>
 
-        <div class="det-bar-tags">
-          <span class="badge det-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
+          <div ng-if="bar.phone" class="div-bar-prop-group">
+            <header>Phone</header>
+            <div>{{bar.phone}}</div>
+          </div>
+
+          <div ng-if="bar.tags && bar.tags.length > 0" class="div-bar-prop-group">
+            <header>Tags</header>
+            <div>
+              <span class="badge det-bar-tag" ng-repeat="tag in bar.tags">{{tag | lowercase}}</span>
+            </div>
+          </div>
+
         </div>
 
-        <div class="col-sm-5 form-group">
-              <div id="map"></div>
-          </div>
-      </div>
+  </div>
 </div>

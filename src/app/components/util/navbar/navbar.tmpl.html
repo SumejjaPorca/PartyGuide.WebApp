@@ -25,10 +25,10 @@
       <ul class="nav navbar-nav navbar-right" ng-if="isLoggedIn()">
         <li><a ui-sref="logout">Log out</a></li>
       </ul>
-      <p class="navbar-text navbar-right" ng-if="isLoggedIn()"><span translate="HELLO">Hello</span>, {{getUser().username}}</p>
+      <p class="navbar-text navbar-right" ng-if="isLoggedIn()"><span translate="NAVBAR.HELLO">Hello</span>, {{getUser().username}}</p>
       <ul class="nav navbar-nav navbar-right">
-        <li><a ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN">English</a></li>
-        <li><a ng-click="changeLanguage('bs')" translate="BUTTON_LANG_BS">Bosnian</a></li>
+        <li><a ng-click="changeLanguage('en')" translate="NAVBAR.LANG_EN">English</a></li>
+        <li><a ng-click="changeLanguage('bs')" translate="NAVBAR.LANG_BS">Bosnian</a></li>
       </ul>
     </div>
   </div>
