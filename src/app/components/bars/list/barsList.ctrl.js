@@ -11,7 +11,6 @@
     $scope.bars = [];
     barsService.get().then(
      function(bars){
-       var bars = bars.data;
        angular.copy(bars, $scope.bars);
      }
    );

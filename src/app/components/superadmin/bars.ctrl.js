@@ -6,21 +6,17 @@
 		.controller('SuperadminBarsCtrl', superadminBarsCtrl);
 
 	/**@ngInject */
-	function superadminBarsCtrl($scope, accountService, toastr, $state, $http, serverName){
-
-		// TODO use bar service
-    $http.get(serverName + '/api/bars').then(function(bars){
-			var bars = bars.data;
-      angular.copy(bars, $scope.bars);
-    });
-
-
+	function superadminBarsCtrl($scope, accountService, toastr, $state, barsService){
 
     $scope.bars = [];
     $scope.error = "";
 
+    barsService.get().then(function(bars){
+      angular.copy(bars, $scope.bars);
+    });
+
 		$scope.removeBar = function(bar){
-			$http.delete(serverName + '/api/bars/' + bar._id)
+			barsService.delete(bar._id)
 			.then(function(response){
 				toastr.success("Bar removed.");
 				for(var i = 0; i < $scope.bars.length; i++){
@@ -29,7 +25,8 @@
 					}
 				}
 			}).catch(function(response){
-
+				if(response.data.id)
+					toastr.error('No bar with this ID. Refresh page.');
 			});
 		}
 	}
