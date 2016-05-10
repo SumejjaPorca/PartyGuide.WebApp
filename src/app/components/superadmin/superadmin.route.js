@@ -23,6 +23,11 @@
 				url:'/create-bar',
 				templateUrl: 'app/components/superadmin/create-bar.tmpl.html',
 				controller: 'CreateBarCtrl'
+			})
+			.state('superadmin.changeadmins',{
+				url:'/{id}/change-admins',
+				templateUrl: 'app/components/superadmin/changeadmins.tmpl.html',
+				controller: 'ChangeAdminsCtrl'
 			});
 	}
 })();
