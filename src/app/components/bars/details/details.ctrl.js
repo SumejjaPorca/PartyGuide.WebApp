@@ -11,12 +11,10 @@
     $scope.bar = {name:"", location:{address:""}, tags: []};
 		$scope.showMap = false;
 
-		var mapProp = {
-				center: { Lat: 43.9000, Lng: 17.4 },
-				zoom: 7
-		};
-		//$scope.map = geolocation.instantiateMap("map", mapProp);
+		var mapProp = { center: { latitude:43.9000, longitude: 17.4 }, zoom: 8 };
 
+		$scope.map = mapProp;
+		
     barsService.getDetailed($stateParams.id).then(
 				function(bar){
 				angular.copy(bar, $scope.bar);
