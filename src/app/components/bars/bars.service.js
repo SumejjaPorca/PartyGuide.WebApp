@@ -39,6 +39,14 @@ function barsService($http, serverName, $q){
   			});
       }
 
+      this.change = function(barModel){
+        return $http({
+  				url: serverName + '/api/bars/' + barModel._id || barModel.id,
+  				method: 'PUT',
+  				data: barModel
+  			});
+      }
+
       this.changeAdmins = function(barId, adminsIds){
         return $http({
   				url: serverName + '/api/bars/' + barId + '/admins',

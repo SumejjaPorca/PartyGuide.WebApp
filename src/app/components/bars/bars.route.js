@@ -23,6 +23,12 @@
 								templateUrl: 'app/components/bars/details/details.tmpl.html',
 								controller: 'barDetailsCtrl',
                 params: { id: null}
+						})
+			.state('bars.change', {
+								url: '/change/{id}',
+								templateUrl: 'app/components/bars/change/change.tmpl.html',
+								controller: 'BarChangeCtrl',
+                params: { id: null}
 						});
 
 	}
