@@ -45,7 +45,7 @@
     barsService.getDetailed($stateParams.id).then(
 				function(bar){
 				angular.copy(bar, $scope.bar);
-				$scope.marker.options.labelContent = "lat: " + bar.location.geo.latitude + ' ' + 'lon: ' + bar.location.geo.longitude;
+				$scope.marker.options.labelContent = "lat: " + bar.location.geo[1] + ' ' + 'lon: ' + bar.location.geo[0];
 		}, function(error){
 				$scope.message = error.data.message;
 		});
