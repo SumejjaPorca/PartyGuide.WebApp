@@ -9,10 +9,13 @@
 	function barsCtrl($scope, accountService, $state, barsService){
 
 		$scope.bars = [];
-		barsService.get().then(function(bars) {
-			angular.copy(bars, $scope.bars);
-		});
 
+
+		$scope.getAll = function(){
+			barsService.get().then(function(bars) {
+				angular.copy(bars, $scope.bars);
+			});
+		}
 		$scope.isLoggedIn = function(){
 			return accountService.isLoggedIn();
 		};
@@ -22,8 +25,21 @@
 		};
 
 		$scope.searchName = function(){
-			alert('luka');
+			if($scope.search.name == ""){ // get all
+				$scope.getAll();
+			}
+			else {
+				barsService.searchByName($scope.search.name).then(function(bars){
+					angular.copy(bars, $scope.bars);
+				});
+			}
 		}
+
+		$scope.search = {
+			name: ""
+		}
+
+		$scope.getAll();
 	}
 
 })();
