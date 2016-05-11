@@ -21,7 +21,7 @@ function barsService($http, serverName, $q){
       };
       this.searchNear = function(lat, long){
         return $http({
-          url: serverName + '/api/bars/near?lat=' + lat.toString() + '?long=' + long.toString(),
+          url: serverName + '/api/bars/near?lat=' + lat.toString() + '&long=' + long.toString(),
           method: "GET"
         }).then(function(response){return response.data;});
       };
