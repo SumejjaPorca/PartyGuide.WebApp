@@ -6,20 +6,46 @@
 		.controller('barDetailsCtrl', detailsCtrl);
 
 	/**@ngInject */
-	function detailsCtrl($scope, accountService, $state, $stateParams, barsService){
+	function detailsCtrl($scope, accountService, $state, $stateParams, barsService, $log, $timeout){
 
     $scope.bar = {name:"", location:{address:""}, tags: []};
 		$scope.showMap = false;
+		var lat = 43.9000;
+		var long = 17.4;
 
-		var mapProp = { center: { latitude:43.9000, longitude: 17.4 }, zoom: 8 };
+		var mapProp = { center: { latitude:lat, longitude: long }, zoom: 8 };
 
 		$scope.map = mapProp;
-		
+
+		$scope.marker = {
+      id: 0,
+      coords: {
+        latitude: lat,
+        longitude: long
+      },
+      options: { draggable: true },
+      events: {
+        dragend: function (marker, eventName, args) {
+          $log.log('marker dragend');
+          var lat = marker.getPosition().lat();
+          var lon = marker.getPosition().lng();
+          $log.log(lat);
+          $log.log(lon);
+          $scope.marker.options = {
+            draggable: true,
+            labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+            labelAnchor: "100 0",
+            labelClass: "marker-labels"
+          };
+        }
+      }
+    };
+
+
     barsService.getDetailed($stateParams.id).then(
 				function(bar){
 				angular.copy(bar, $scope.bar);
-				//$scope.Marker = new geolocation.Marker($scope.map, { lat: $scope.bar.Loc.Lat, lng: $scope.Loc.Long });
-				//$scope.map.panTo($scope.Marker.getPosition());
+				$scope.marker.options.labelContent = "lat: " + bar.location.geo.latitude + ' ' + 'lon: ' + bar.location.geo.longitude;
 		}, function(error){
 				$scope.message = error.data.message;
 		});
