@@ -85,6 +85,8 @@
 				});
 			}
 		}
+
+
 		$scope.searchNear = function(){
 			barsService.searchNear($scope.search.latitude, $scope.search.longitude).then(function(bars){
 					angular.copy(bars, $scope.bars);
