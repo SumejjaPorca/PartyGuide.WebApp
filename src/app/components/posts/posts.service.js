@@ -16,5 +16,10 @@ function service($http, serverName, $q){
 
       };
 
+      this.create = function(barId, postModel){
+        postModel.barId = barId;
+        return $http.post(serverName + '/api/posts', postModel);
+
+      };
   }
 })();

@@ -35,8 +35,21 @@
 			}
 		}
 
+		$scope.searchTags = function(){
+			if($scope.search.tags == ""){ // get all
+				$scope.getAll();
+			}
+			else {
+				var tags = $scope.search.tags.split(" ");
+				console.log(tags);
+				barsService.searchByTags(tags).then(function(bars){
+					angular.copy(bars, $scope.bars);
+				});
+			}
+		}
 		$scope.search = {
-			name: ""
+			name: "",
+			tags:""
 		}
 
 		$scope.getAll();

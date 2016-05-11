@@ -17,7 +17,18 @@
         </form>
       </accordion-group>
       <accordion-group heading="Search by tags">
-        Ovdje ide pretrazivanje po tagovima
+        <form ng-submit="searchTags()"class="col-md-6">
+          <div class="form-group">
+            <label class="control-label" for="searchName">Enter tags you want search</label>
+            <input class="form-control" id="searchName" type="text"
+            placeholder="Tags separated by space" ng-model="search.tags">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="col-md-2 btn btn-primary">
+              <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+          </div>
+        </form>
       </accordion-group>
       <accordion-group heading="Search near bar">
         Ovdje ide pretrazivanje barova u blizini neke lokacije

@@ -29,6 +29,12 @@
 								templateUrl: 'app/components/bars/change/change.tmpl.html',
 								controller: 'BarChangeCtrl',
                 params: { id: null}
+						})
+			.state('bars.post', {
+								url: '/post/{id}',
+								templateUrl: 'app/components/posts/create.tmpl.html',
+								controller: 'PostsCreateCtrl',
+								params: { id: null}
 						});
 
 	}

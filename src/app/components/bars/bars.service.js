@@ -55,6 +55,14 @@ function barsService($http, serverName, $q){
   			});
       }
 
+      this.searchByTags = function(tags){
+        return $http({
+          url: serverName + '/api/bars/bytags',
+          method: "POST",
+          data:{tags:tags}
+        }).then(function(response){ return response.data; });
+      }
+
       this.searchByName = function(name){
         return $http({
           url: serverName + '/api/bars/byName/' + name,

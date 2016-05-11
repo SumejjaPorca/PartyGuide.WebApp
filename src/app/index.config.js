@@ -39,7 +39,9 @@
         EMAIL_EXISTS:"Email already exists.",
         PASS_REQ:"Password is required.",
         PASS_WEAK:"Password is weak. Password must be minimum 8 char long, and have at least one lowercase and uppercase letter.",
-        REG_ERR:"Registration error."
+        REG_ERR:"Registration error.",
+        LOGIN:"Login",
+        RESPASS:"Reset password"
       },
       NAVBAR:{
         LANG_EN: 'English',
@@ -78,7 +80,9 @@
         EMAIL_EXISTS:"Email već postoji.",
         PASS_REQ:"Lozinka je obavezna.",
         PASS_WEAK:"Lozinka je slaba. Lozinka mora bit duga bar 8 znakova i imati barem jedno veliko i jedno malo slovo.",
-        REG_ERR:"Greška pri registraciji."
+        REG_ERR:"Greška pri registraciji.",
+        LOGIN:"Logiraj se",
+        RESPASS:"Resetiraj lozinku"
       },
       NAVBAR:{
         LANG_EN: 'Engleski',
