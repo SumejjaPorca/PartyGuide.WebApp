@@ -5,11 +5,13 @@
 		.module('pg.bars')
 		.controller('barDetailsCtrl', detailsCtrl);
 
-	/**@ngInject */
-	function detailsCtrl($scope, accountService, $state, $stateParams, barsService, $log, $timeout){
+/**@ngInject */
+	function detailsCtrl($scope, accountService, $state, $stateParams, barsService,
+		 $log, $timeout, postsService){
 
-    $scope.bar = {name:"", location:{address:""}, tags: []};
+		$scope.bar = {name:"", location:{address:""}, tags: []};
 		$scope.showMap = false;
+		$scope.posts = [];
 		var lat = 43.9000;
 		var long = 17.4;
 
@@ -41,7 +43,6 @@
       }
     };
 
-
     barsService.getDetailed($stateParams.id).then(
 				function(bar){
 				angular.copy(bar, $scope.bar);
@@ -50,30 +51,33 @@
 				$scope.message = error.data.message;
 		});
 
-     $scope.isLoggedIn = function(){
-         return accountService.isLoggedIn();
-     };
+		postsService.getByBar($stateParams.id).then(function(posts){
+			angular.copy(posts,$scope.posts);
+		});
+		$scope.isLoggedIn = function(){
+		   return accountService.isLoggedIn();
+		};
 
-     $scope.go = function(state, params){
-         $state.go(state, params)
-     };
+		$scope.go = function(state, params){
+		   $state.go(state, params)
+		};
 
-		 $scope.isAdmin = function(){
-			 var user = accountService.getCurrentUser();
-			 if(!user) return false;
+		$scope.isAdmin = function(){
+			var user = accountService.getCurrentUser();
+			if(!user) return false;
 
-			 user = user.user;
-			 if(!user) return false;
+			user = user.user;
+			if(!user) return false;
 
-			 var adminOf = user.adminOf;
+			var adminOf = user.adminOf;
 
-			 for(var i in adminOf)
-			 {
-				 if(adminOf[i] == $scope.bar._id)
-				 	return true;
-			 }
-			 return false;
-		 }
+			for(var i in adminOf)
+			{
+				if(adminOf[i] == $scope.bar._id)
+					return true;
+			}
+			return false;
+		}
 	}
 
 })();
