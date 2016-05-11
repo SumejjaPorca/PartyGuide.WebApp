@@ -7,7 +7,7 @@
 
 	/**@ngInject */
 	function createBarCtrl($scope, accountService, toastr, $timeout, $state,
-		barsService, $filter){
+		barsService, $filter, $log){
 
 			    $scope.bar = {
 						name:"",
@@ -24,25 +24,28 @@
 			$scope.$watchCollection("bar.location.geo[0]", function (newVal, oldVal) {
       if (_.isEqual(newVal, oldVal))
         return;
-      $scope.coords.longitude = newVal;
-    });
+				$timeout(function () {
+					$scope.marker.coords.longitude = newVal;
+					$scope.map.center = $scope.marker.coords;
+		    }, 5000);
+      });
 
 			$scope.$watchCollection("bar.location.geo[1]", function (newVal, oldVal) {
 				if (_.isEqual(newVal, oldVal))
 				return;
-				$scope.coords.latitude = newVal;
+				$timeout(function () {
+					$scope.marker.coords.latitude = newVal;
+					$scope.map.center = $scope.marker.coords;
+		    }, 5000);
 			});
 
-			var mapProp = { center: { latitude:lat, longitude: long }, zoom: 8 };
+			var mapProp = { center: $scope.coords, zoom: 8 };
 
 			$scope.map = mapProp;
 
 			$scope.marker = {
 				id: 0,
-				coords: {
-					latitude: lat,
-					longitude: long
-				},
+				coords: $scope.coords,
 				options: { draggable: true },
 				events: {
 					dragend: function (marker, eventName, args) {
