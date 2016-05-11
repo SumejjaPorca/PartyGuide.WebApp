@@ -53,7 +53,8 @@
 						var lat = marker.getPosition().lat();
 						var lon = marker.getPosition().lng();
 						$scope.bar.location.address = ""; //for now
-						$scope.bar.geo = [lat,lon];
+						$scope.bar.location.geo[0] = lon;
+						$scope.bar.location.geo[1] = lat;
 						$log.log(lat);
 						$log.log(lon);
 						$scope.marker.options = {
