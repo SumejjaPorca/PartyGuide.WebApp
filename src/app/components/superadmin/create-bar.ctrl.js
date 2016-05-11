@@ -7,22 +7,72 @@
 
 	/**@ngInject */
 	function createBarCtrl($scope, accountService, toastr, $timeout, $state,
-		barsService, $filter){
+		barsService, $filter, $log){
+
+			    $scope.bar = {
+						name:"",
+						description:"",
+						location:{
+							address:"",
+							geo:["",""]
+						},
+						tags:[]
+					};
+
+			$scope.coords = {latitude:43.9000, longitude:17.4};
+
+			$scope.$watchCollection("bar.location.geo[0]", function (newVal, oldVal) {
+      if (_.isEqual(newVal, oldVal))
+        return;
+				$timeout(function () {
+					$scope.marker.coords.longitude = newVal;
+					$scope.map.center = $scope.marker.coords;
+		    }, 5000);
+      });
+
+			$scope.$watchCollection("bar.location.geo[1]", function (newVal, oldVal) {
+				if (_.isEqual(newVal, oldVal))
+				return;
+				$timeout(function () {
+					$scope.marker.coords.latitude = newVal;
+					$scope.map.center = $scope.marker.coords;
+		    }, 5000);
+			});
+
+			var mapProp = { center: $scope.coords, zoom: 8 };
+
+			$scope.map = mapProp;
+
+			$scope.marker = {
+				id: 0,
+				coords: $scope.coords,
+				options: { draggable: true },
+				events: {
+					dragend: function (marker, eventName, args) {
+						$log.log('marker dragend');
+						var lat = marker.getPosition().lat();
+						var lon = marker.getPosition().lng();
+						$scope.bar.location.address = ""; //for now
+						$scope.bar.location.geo[0] = lon;
+						$scope.bar.location.geo[1] = lat;
+						$log.log(lat);
+						$log.log(lon);
+						$scope.marker.options = {
+							draggable: true,
+							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+							labelAnchor: "100 0",
+							labelClass: "marker-labels"
+						};
+					}
+				}
+			};
 
 
-
-    $scope.bar = {
-			name:"",
-			description:"",
-			location:{
-				address:"",
-				geo:["",""]
-			},
-			tags:[]
-		};
     $scope.error = "";
 		$scope.newTag = "";
+
 		var stopPropagation = false;
+
 		$scope.create = function(){
 
 			if(stopPropagation == true){
@@ -44,7 +94,6 @@
 
 			barsService.create($scope.bar).then(function(response){
 				toastr.success("Bar created.");
-
 				$timeout(function () {
 					$state.go('superadmin.bars')
 				}, 1500);
