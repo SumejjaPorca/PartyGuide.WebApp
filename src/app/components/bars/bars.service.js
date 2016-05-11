@@ -19,6 +19,12 @@ function barsService($http, serverName, $q){
           method: "GET"
         }).then(function(response){return response.data;});
       };
+      this.getNear = function(lat, long){
+        return $http({
+          url: serverName + '/api/bars/near?lat=' + lat.toString() + '?long=' + long.toString(),
+          method: "GET"
+        }).then(function(response){return response.data;});
+      };
 
       this.getAdmins = function(id){
         return $http({
