@@ -21,11 +21,17 @@
             <div class="det-bar-title">{{bar.name}}</div>
             <div class="det-bar-add">{{bar.location.address}}</div>
             <div ng-click="showMap = !showMap" ng-show="bar.location && bar.location.geo" class="det-bar-geo">
-              <span class="glyphicon glyphicon-map-marker"></span>
-              <span ng-show="!showMap" translate="BAR.DET.SHOW_MAP">Show on the map</span>
-              <span ng-show="showMap" translate="BAR.DET.CLOSE_MAP">Close the map</span>
+            </br>
+            <span class="glyphicon glyphicon-map-marker"></span>
+            <span ng-show="!showMap" translate="BAR.DET.SHOW_MAP">Show on the map</span>
+            <span ng-show="showMap" translate="BAR.DET.CLOSE_MAP">Close the map</span>
             </div>
-            <div ng-if="showMap" class="det-bar-map"><h3 id="map">Google Map go here</h3><p>Namjerno je margina pomjerena ulijevo i udesno kako bi slika karte isla od kraja do kraja. Ukoliko bude ruzno ukloniti .det-bar-map iz bars.less.</p></div>
+            <div ng-if="showMap" class="det-bar-map">
+              <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                </ui-gmap-marker>
+              </ui-gmap-google-map>
+              </div>
           </header>
 
           <div ng-if="bar.description" class="div-bar-prop-group">
