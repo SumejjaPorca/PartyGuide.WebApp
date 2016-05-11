@@ -8,21 +8,22 @@
 	/**@ngInject */
 	function barsCtrl($scope, accountService, $state, barsService){
 
-    $scope.bars = [];
-    barsService.get().then(
-     function(bars){
-       angular.copy(bars, $scope.bars);
-     }
-   );
+		$scope.bars = [];
+		barsService.get().then(function(bars) {
+			angular.copy(bars, $scope.bars);
+		});
 
-     $scope.isLoggedIn = function(){
-             return accountService.isLoggedIn();
-         };
+		$scope.isLoggedIn = function(){
+			return accountService.isLoggedIn();
+		};
 
-         $scope.go = function(state, params){
-             $state.go(state, params)
-         };
+		$scope.go = function(state, params){
+			$state.go(state, params)
+		};
 
+		$scope.searchName = function(){
+			alert('luka');
+		}
 	}
 
 })();

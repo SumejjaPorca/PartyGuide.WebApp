@@ -2,7 +2,21 @@
 <div class="container-fluid">
   <div class="row">
 
+        <div class="det-bar" ng-if="isAdmin()">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6 btn-options" ui-sref="bars.change({id:bar._id})">
+                <span class="glyphicon glyphicon-pencil"></span> Edit bar
+              </div>
+              <div class="col-sm-6 btn-options">
+                <span class="glyphicon glyphicon-plus"></span> Write post
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="det-bar">
+
           <header>
             <div class="det-bar-title">{{bar.name}}</div>
             <div class="det-bar-add">{{bar.location.address}}</div>

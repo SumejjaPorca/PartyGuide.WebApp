@@ -20,6 +20,13 @@ function barsService($http, serverName, $q){
         }).then(function(response){return response.data;});
       };
 
+      this.getAdmins = function(id){
+        return $http({
+          url: serverName + '/api/bars/' + id + '/admins',
+          method: "GET"
+        }).then(function(response){return response.data;});
+      }
+
       this.delete = function(id){
         return $http.delete(serverName + '/api/bars/' + id)
       }
@@ -29,6 +36,22 @@ function barsService($http, serverName, $q){
   				url: serverName + '/api/bars',
   				method: 'POST',
   				data: barModel
+  			});
+      }
+
+      this.change = function(barModel){
+        return $http({
+  				url: serverName + '/api/bars/' + barModel._id || barModel.id,
+  				method: 'PUT',
+  				data: barModel
+  			});
+      }
+
+      this.changeAdmins = function(barId, adminsIds){
+        return $http({
+  				url: serverName + '/api/bars/' + barId + '/admins',
+  				method: 'PUT',
+  				data: adminsIds
   			});
       }
 

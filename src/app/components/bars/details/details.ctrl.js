@@ -32,6 +32,22 @@
          $state.go(state, params)
      };
 
+		 $scope.isAdmin = function(){
+			 var user = accountService.getCurrentUser();
+			 if(!user) return false;
+
+			 user = user.user;
+			 if(!user) return false;
+
+			 var adminOf = user.adminOf;
+
+			 for(var i in adminOf)
+			 {
+				 if(adminOf[i] == $scope.bar._id)
+				 	return true;
+			 }
+			 return false;
+		 }
 	}
 
 })();

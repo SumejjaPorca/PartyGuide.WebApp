@@ -10,6 +10,10 @@
   border-radius: 3px;
   box-shadow: 0px 1px 3px -1px black;
   cursor:pointer;
+
+  &>button{
+    margin-left: 2px;
+  }
 }
 
 .sa-bar .sa-bar-title{
@@ -65,5 +69,25 @@
     &:hover{
       box-shadow: 0px 0.5px 2px -1px black;
     }
+  }
+}
+.sp-ca-user{
+  margin: 0 -16px;
+  position:relative;
+  padding: 1em 36px 1em 16px;
+
+  &:hover{
+    background-color: darken(@gray-lighter, 10%);
+  }
+  .sp-ca-user-username{
+    font-size: 1.3em;
+  }
+  .sp-ca-user-email{
+    font-size: 1em;
+  }
+  .sp-ca-btn{
+    position:absolute;
+    right:16px;
+    top: 21px;
   }
 }

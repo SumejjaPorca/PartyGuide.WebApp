@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="det-bar">
+      <header>
+        <h4>Change Admins</h4>
+        <div class="det-bar-title">{{bar.name}}</div>
+        <div class="det-bar-add">{{bar.location.address}}</div>
+      </header>
+
+      <div ng-if="bar.tags && bar.tags.length > 0" class="div-bar-prop-group">
+        <header>Current admins</header>
+        <div ng-if="admins.length == 0"><em>No admins</em></div>
+
+        <div class="sp-ca-user" ng-repeat="user in admins">
+          <div class="sp-ca-user-username">{{user.username}}</div>
+          <div class="sp-ca-user-email">{{user.email}}</div>
+          <div class="sp-ca-btn">
+            <div class="btn btn-sm btn-danger" ng-click="removeAdmin($index)">
+              <span class="glyphicon glyphicon-remove"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="btn btn-success pull-right" ng-click="save()">Save changes</div>
+        </div>
+      </div>
+      <div ng-if="bar.tags && bar.tags.length > 0" class="div-bar-prop-group">
+        <header>Add admin</header>
+
+        <div class="form-group">
+          <label class="control-label" for="adminSearch">Search users</label>
+          <input class="form-control" id="adminSearch" type="text" placeholder="Username or email..."
+            ng-model="adminSearch.text" ng-model-options="{ updateOn: 'default blur', debounce: { default: 700, blur: 0 } }">
+        </div>
+
+        <div class="sp-ca-user" ng-repeat="user in foundAdmins">
+          <div class="sp-ca-user-username">{{user.username}}</div>
+          <div class="sp-ca-user-email">{{user.email}}</div>
+          <div class="sp-ca-btn">
+            <div class="btn btn-sm btn-success" ng-disabled="inAdmins(user)"
+              ng-click="addAdmin(user)">
+              <span class="glyphicon glyphicon-ok"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
