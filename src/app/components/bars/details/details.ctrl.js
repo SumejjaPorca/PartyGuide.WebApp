@@ -7,11 +7,12 @@
 
 /**@ngInject */
 	function detailsCtrl($scope, accountService, $state, $stateParams, barsService,
-		 $log, $timeout, postsService){
+		 $log, $timeout, postsService, reviewsService){
 
 		$scope.bar = {name:"", location:{address:""}, tags: []};
 		$scope.showMap = false;
 		$scope.posts = [];
+		$scope.reviews = [];
 		$scope.index = 0;
 
 		var lat = 43.9000;
@@ -56,6 +57,10 @@
 		postsService.getByBar($stateParams.id).then(function(posts){
 			angular.copy(posts,$scope.posts);
 			$scope.index = $scope.posts.length - 1;
+		});
+
+		reviewsService.getByBar($stateParams.id).then(function(reviews){
+			angular.copy(reviews,$scope.reviews);
 		});
 		$scope.isLoggedIn = function(){
 		   return accountService.isLoggedIn();
