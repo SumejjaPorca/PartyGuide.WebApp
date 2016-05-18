@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-  <div class="row">
+  <div>
 
         <div class="det-bar" ng-if="isAdmin()">
           <div class="container-fluid">
@@ -52,8 +52,15 @@
           </div>
 
         </div>
-
-        <pg-post ng-repeat="post in posts" post="post"></pg-post>
+        <div class="row">
+        <div class="col-sm-1 pager previous" ng-class="{disabled:HasPrevious() == false}" ng-click="Previous()">
+          « Older post
+        </div>
+          <pg-post post="posts[index]"></pg-post>
+          <div class="col-sm-1 pager next noselect" ng-class="{disabled: HasNext() == false}" ng-click="Next()">
+            Newer post »
+          </div>
+        </div>
 
   </div>
 </div>

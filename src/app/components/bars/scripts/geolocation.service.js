@@ -9,42 +9,6 @@
 
         var Geocoder = new google.maps.Geocoder();
 
-        this.instantiateMap = function (elementId, mapProp) {
-            var prop = {
-                center: new google.maps.LatLng(mapProp.center.Lat, mapProp.center.Lng),
-                zoom: mapProp.zoom,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var element = document.getElementById(elementId);
-           return new google.maps.Map(element, prop);
-        }
-
-        this.Marker = function (map, pos) {
-            var map = map;
-            var pos = pos;
-            var marker = new google.maps.Marker({
-                map: map,
-                position: new google.maps.LatLng(pos.lat, pos.lng)
-            });
-            this.hide = function () {
-                marker.setMap(null);
-            }
-            this.show = function () {
-                marker.setMap(map);
-            };
-            this.changeMap = function (newMap) {
-                map = newMap;
-                marker.setMap(map);
-            }
-            this.changePosition = function(newPos){
-                pos = newPos;
-                marker.setPosition(new google.maps.LatLng(newPos.H, newPos.L));
-                marker.setMap(map);
-            }
-            this.getPosition = function () {
-                return pos;
-            }
-        }
 
         this.getLatLng = function (address) {
 
@@ -52,6 +16,7 @@
 
             Geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
+                  console.log(results[0]);
                     deferred.resolve(results[0].geometry.location);
                 }
                 else {
@@ -60,6 +25,24 @@
             });
             return deferred.promise;
         }
+
+      this.getAddress = function (lat, lng){
+        var deferred = $q.defer();
+        var latlng = new google.maps.LatLng(lat, lng);
+        Geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                          deferred.resolve(results[1].formatted_address);// details address
+                        } else {
+                            console.log('Location not found');
+                        }
+                    } else {
+                        console.log('Geocoder failed due to: ' + status);
+                    }
+                    deferred.reject("");
+                });
+                return deferred.promise;
+      }
 
     };
 

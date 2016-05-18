@@ -7,7 +7,7 @@
 
 	/**@ngInject */
 	function createBarCtrl($scope, accountService, toastr, $timeout, $state,
-		barsService, $filter, $log){
+		barsService, $filter, $log, geolocation){
 
 			    $scope.bar = {
 						name:"",
@@ -21,27 +21,37 @@
 
 			$scope.coords = {latitude:43.9000, longitude:17.4};
 
-			$scope.$watchCollection("bar.location.geo[0]", function (newVal, oldVal) {
-      if (_.isEqual(newVal, oldVal))
-        return;
-				$timeout(function () {
-					$scope.marker.coords.longitude = newVal;
-					$scope.map.center = $scope.marker.coords;
-		    }, 5000);
-      });
-
-			$scope.$watchCollection("bar.location.geo[1]", function (newVal, oldVal) {
-				if (_.isEqual(newVal, oldVal))
-				return;
-				$timeout(function () {
-					$scope.marker.coords.latitude = newVal;
-					$scope.map.center = $scope.marker.coords;
-		    }, 5000);
-			});
-
-			var mapProp = { center: $scope.coords, zoom: 8 };
+			var mapProp = { center: $scope.coords, zoom: 10 };
 
 			$scope.map = mapProp;
+
+					$scope.map = mapProp;
+
+					$scope.searchbox = {
+			          template:'app/components/superadmin/searchbox.tpl.html',
+			          events:{
+			            places_changed: function (searchBox) {
+											$timeout(function () {
+												geolocation.getLatLng($scope.bar.location.address).then(function(response){
+													var coords = response;
+													$scope.marker.coords.latitude = coords.lat();
+													$scope.marker.coords.longitude = coords.lng();
+													$scope.bar.location.geo[0] = coords.lng();
+													$scope.bar.location.geo[1] = coords.lat();
+													$scope.map.center = $scope.marker.coords;
+													$scope.marker.options = {
+														draggable: true,
+														labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+														labelAnchor: "100 0",
+														labelClass: "marker-labels"
+													};
+												});
+
+									    }, 500);
+									}
+			          },
+								parentdiv:'searchbox'
+			        };
 
 			$scope.marker = {
 				id: 0,
@@ -52,11 +62,11 @@
 						$log.log('marker dragend');
 						var lat = marker.getPosition().lat();
 						var lon = marker.getPosition().lng();
-						$scope.bar.location.address = ""; //for now
+						geolocation.getAddress(lat, lon).then(function(address){
+							$scope.bar.location.address = address;
+						});
 						$scope.bar.location.geo[0] = lon;
 						$scope.bar.location.geo[1] = lat;
-						$log.log(lat);
-						$log.log(lon);
 						$scope.marker.options = {
 							draggable: true,
 							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,

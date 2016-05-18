@@ -6,18 +6,46 @@
 		.controller('barsListCtrl', barsCtrl);
 
 	/**@ngInject */
-	function barsCtrl($scope, accountService, $state, barsService, $log, $timeout){
+	function barsCtrl($scope, accountService, $state, barsService, $log, $timeout, geolocation){
 
 		$scope.bars = [];
 
 		$scope.search = {
 			name: "",
-			coords : {latitude:43.9000, longitude:17.4}
+			coords : {latitude:43.9000, longitude:17.4},
+			address: ""
 		};
 
-		var mapProp = { center: $scope.search.coords, zoom: 8 };
+		var mapProp = { center: $scope.search.coords, zoom: 10 };
 
 		$scope.map = mapProp;
+
+		$scope.searchbox = {
+          template:'app/components/bars/list/searchbox.tpl.html',
+          events:{
+            places_changed: function (searchBox) {
+
+							$timeout(function () {
+								geolocation.getLatLng($scope.search.address).then(function(response){
+									var coords = response;
+									$scope.marker.coords.latitude = coords.lat();
+									$scope.marker.coords.longitude = coords.lng();
+									$scope.map.center = $scope.marker.coords;
+									$scope.marker.options = {
+										draggable: true,
+										labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+										labelAnchor: "100 0",
+										labelClass: "marker-labels"
+									};
+								});
+
+					    }, 500);
+						}
+          },
+					parentdiv: 'searchbox'
+        };
+
+
 
 		$scope.marker = {
 			id: 0,
@@ -30,8 +58,9 @@
 					var lon = marker.getPosition().lng();
 					$scope.search.longitude = lon;
 					$scope.search.latitude = lat;
-					$log.log(lat);
-					$log.log(lon);
+					geolocation.getAddress(lat, lon).then(function(address){
+						$scope.search.address = address;
+					});
 					$scope.marker.options = {
 						draggable: true,
 						labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
@@ -41,24 +70,6 @@
 				}
 			}
 		};
-
-		$scope.$watchCollection("search.longitude", function (newVal, oldVal) {
-		if (_.isEqual(newVal, oldVal))
-			return;
-			$timeout(function () {
-				$scope.marker.coords.longitude = newVal;
-				$scope.map.center = $scope.marker.coords;
-			}, 5000);
-		});
-
-		$scope.$watchCollection("search.latitude", function (newVal, oldVal) {
-			if (_.isEqual(newVal, oldVal))
-			return;
-			$timeout(function () {
-				$scope.marker.coords.latitude = newVal;
-				$scope.map.center = $scope.marker.coords;
-			}, 5000);
-		});
 
 
 

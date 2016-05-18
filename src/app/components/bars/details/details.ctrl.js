@@ -12,6 +12,8 @@
 		$scope.bar = {name:"", location:{address:""}, tags: []};
 		$scope.showMap = false;
 		$scope.posts = [];
+		$scope.index = 0;
+
 		var lat = 43.9000;
 		var long = 17.4;
 
@@ -53,6 +55,7 @@
 
 		postsService.getByBar($stateParams.id).then(function(posts){
 			angular.copy(posts,$scope.posts);
+			$scope.index = $scope.posts.length - 1;
 		});
 		$scope.isLoggedIn = function(){
 		   return accountService.isLoggedIn();
@@ -77,6 +80,30 @@
 					return true;
 			}
 			return false;
+		}
+
+		$scope.Previous = function(){ //previous post
+			if(!$scope.HasPrevious())
+				return;
+			$scope.index = $scope.index - 1;
+			return true;
+		}
+
+		$scope.HasPrevious = function(){
+			return $scope.index > 0;
+		}
+
+		$scope.HasNext = function(){
+			if ($scope.posts != undefined)
+				return $scope.index < $scope.posts.length - 1;
+			else return false;
+    }
+
+    $scope.Next = function(){ //newer post
+			if(!$scope.HasNext())
+				return;
+			$scope.index = $scope.index + 1;
+      return true;
 		}
 	}
 
