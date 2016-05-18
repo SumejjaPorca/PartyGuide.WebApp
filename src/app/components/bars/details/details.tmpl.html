@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-  <div>
+  <div class="row">
 
         <div class="det-bar" ng-if="isAdmin()">
           <div class="container-fluid">
@@ -52,15 +52,45 @@
           </div>
 
         </div>
-        <div class="row">
-        <div class="col-sm-1 pager previous" ng-class="{disabled:HasPrevious() == false}" ng-click="Previous()">
-          « Older post
-        </div>
-          <pg-post post="posts[index]"></pg-post>
-          <div class="col-sm-1 pager next noselect" ng-class="{disabled: HasNext() == false}" ng-click="Next()">
-            Newer post »
+
+
+        <pg-post post="posts[index]" ng-if="posts.length > 0"></pg-post>
+        <div ng-if="posts.length == 0">
+          <div class="container-fluid">
+            <div class="row">
+              No posts to show.
+            </div>
           </div>
         </div>
+
+        <div class="det-pager">
+          <ul class="pager pager-lg">
+            <li class="previous noselect" ng-class="{disabled:HasPrevious() == false}" ng-click="Previous()">
+              <a href="">« Older post</a>
+            </li>
+            <li class="next noselect" ng-class="{disabled: HasNext() == false}" ng-click="Next()">
+              <a href="">Newer post »</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="">
+          <div class = "det-bar">
+            <div class="det-bar-title">Reviews</div>
+          </br>
+            <div ng-if="reviews.length == 0"> No reviews to show.</div>
+            <div ng-repeat="review in reviews">
+              <div class="row review">
+                <header>
+                  <div class="pg-review-author">{{review.user.username}}</div>
+                  <div class="pg-review-date">{{review.dateCreated | date}}</div>
+                </header>
+                <p class="pg-review-text">{{review.comment}}</p> <span class="pg-review-rate">{{review.rate}}</span>
+                </div>
+            </div>
+          </div>
+        </div>
+
 
   </div>
 </div>
