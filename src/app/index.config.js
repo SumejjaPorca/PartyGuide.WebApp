@@ -50,7 +50,8 @@
       },
       BAR:{
         LIST:{
-          DETAILS:"See more details"
+          DETAILS:"See more details",
+          SEARCH: "Search"
         },
         DET:{
           SHOW_MAP:"Show on the map",
@@ -91,7 +92,8 @@
       },
       BAR: {
         LIST:{
-          DETAILS:"Pogledaj više detalja"
+          DETAILS:"Pogledaj više detalja",
+          SEARCH:"Traži"
         },
         DET: {
           SHOW_MAP:"Prikaži na mapi",
