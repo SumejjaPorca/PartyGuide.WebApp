@@ -76,7 +76,9 @@
 						$scope.errors.push("Email isn't confirmed.");
 					}
 				}
-
+				if(response.data.banned){
+					$scope.errors.push("You are banned.");
+				}
 				if($scope.errors.length > 0)
 					toastr.error($scope.errors.join(' '), 'Login failed.');
 				else

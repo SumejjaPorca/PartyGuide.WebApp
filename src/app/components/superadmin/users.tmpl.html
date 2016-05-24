@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="det-bar">
+      <header>
+        <h4>Ban/Unban users</h4>
+      </header>
+
+      <div class="div-bar-prop-group">
+        <header>Search users</header>
+
+        <div class="form-group">
+          <label class="control-label" for="search">Search users</label>
+          <input class="form-control" id="search" type="text" placeholder="Username or email..."
+            ng-model="search.text" ng-model-options="{ updateOn: 'default blur', debounce: { default: 700, blur: 0 } }">
+        </div>
+
+        <div class="sp-ca-user" ng-repeat="user in users">
+          <div class="sp-ca-user-username">{{user.username}}</div>
+          <div class="sp-ca-user-email">{{user.email}}</div>
+          <div class="sp-ca-btn">
+            <div class="btn btn-sm" ng-class="{'btn-danger':!user.banned, 'btn-success':user.banned}"
+              ng-click="toggleBan(user)">
+              <span ng-show="!user.banned">Ban</span>
+              <span ng-show="user.banned">Un ban</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

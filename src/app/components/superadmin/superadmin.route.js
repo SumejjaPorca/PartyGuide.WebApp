@@ -19,6 +19,11 @@
 					templateUrl: 'app/components/superadmin/bars.tmpl.html',
 					controller: 'SuperadminBarsCtrl'
 			})
+			.state('superadmin.users', {
+					url: '/users',
+					templateUrl: 'app/components/superadmin/users.tmpl.html',
+					controller: 'SuperadminUsersCtrl'
+			})
 			.state('superadmin.createBar',{
 				url:'/create-bar',
 				templateUrl: 'app/components/superadmin/create-bar.tmpl.html',
