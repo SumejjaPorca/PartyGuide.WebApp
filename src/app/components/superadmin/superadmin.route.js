@@ -11,11 +11,10 @@
 			.state('superadmin', {
 					url: '/superadmin',
 					templateUrl: 'app/components/superadmin/superadmin.tmpl.html',
-					controller: 'SuperadminCtrl',
-					abstract:true
+					controller: 'SuperadminCtrl'
 			})
 			.state('superadmin.bars', {
-					url: '',
+					url: '/bars',
 					templateUrl: 'app/components/superadmin/bars.tmpl.html',
 					controller: 'SuperadminBarsCtrl'
 			})

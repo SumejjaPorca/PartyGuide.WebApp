@@ -1,10 +1,29 @@
 <div class="row">
 
   <h4>Superadmin panel</h4>
+  <div class="container-fluid">
 
-  <div class="col-md-12">
-    <div class="alert alert-danger" ng-if="error">{{error}}</div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger" ng-if="error">{{error}}</div>
+      </div>
+
+      <div class="sa-bar-out col-md-6" ui-sref="superadmin.bars">
+        <div class="sa-bar">
+          <div class="sa-bar-title"><small><span class="glyphicon glyphicon-pencil"></span> Manage bars</div></small>
+        </div>
+      </div>
+
+      <div class="sa-bar-out col-md-6" ui-sref="superadmin.users">
+        <div class="sa-bar">
+          <div class="sa-bar-title"><small><span class="glyphicon glyphicon-pencil"></span> Manage users</div></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ui-view></div>
+    </div>
+
   </div>
-
-  <div ui-view></div>
 </div>
