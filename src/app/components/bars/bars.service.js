@@ -75,5 +75,11 @@ function barsService($http, serverName, $q){
           method: "GET"
         }).then(function(response){ return response.data; });
       }
+      this.getStats = function(){
+        return $http({
+          url: serverName + '/api/bars/statistics',
+          method: "GET"
+        });
+      };
   }
 })();

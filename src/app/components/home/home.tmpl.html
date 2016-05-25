@@ -7,13 +7,13 @@
 
     </div>
 </div>
-<div ng-if="isLoggedIn()">
-
   <div class="row">
-    <h4>Bars</h4>
+    <h2>Our page statistic</h2>
 
-    <div><a ui-sref="bars.list">See bars</a></div>
+    <canvas id="base" class="chart-base" chart-type="main.type"
+  chart-data="main.data" chart-labels="main.labels" chart-legend="true">
+</canvas>
+
+
 
   </div>
-
-</div>

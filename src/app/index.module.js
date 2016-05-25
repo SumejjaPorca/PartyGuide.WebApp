@@ -3,6 +3,6 @@
 
   angular
     .module('pg', ['ui.router', 'pascalprecht.translate', 'ui.bootstrap',
-    'pg.account','pg.superadmin', 'pg.bars', 'pg.users', 'pg.posts']);
+    'pg.account','pg.superadmin', 'pg.bars', 'pg.users', 'pg.posts', 'chart.js']);
 
 })();

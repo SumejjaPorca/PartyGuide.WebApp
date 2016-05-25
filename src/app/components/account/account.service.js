@@ -35,6 +35,13 @@
 					});
 				};
 
+				this.getStats = function(){
+					return $http({
+						url: serverName + '/api/user/statistics',
+						method: "GET"
+					});
+				};
+
 				this.resetPass = function(resetModel){
 					return $http({
 						url: serverName + '/api/user/reset-pass',

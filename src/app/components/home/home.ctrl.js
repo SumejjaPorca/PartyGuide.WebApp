@@ -7,15 +7,27 @@
 		.controller('HomeCtrl', homeCtrl);
 
 		/** @ngInject */
-		function homeCtrl($scope, accountService, $state, toastr, barsService){
+		function homeCtrl($scope, accountService, $state, toastr, barsService, reviewsService){
 
-			 $scope.bars = [];
-			 barsService.get().then(
-				function(bars){
-					var bars = bars.data;
-		      angular.copy(bars, $scope.bars);
-		    }
-			);
+		accountService.getStats().then(function(response){
+				$scope.main.data[0] = response.data.count;
+		}
+		);
+		barsService.getStats().then(function(response){
+				$scope.main.data[1] = response.data.count;
+		}
+		);
+		reviewsService.getStats().then(function(response){
+				$scope.main.data[2] = response.data.count;
+		}
+		);
+
+    $scope.main = {
+			labels : ["Users", "Bars", "Reviews"],
+	    data : [0, 0, 0],
+	    type : 'Pie'
+
+		};
 
     		$scope.isLoggedIn = function(){
                 return accountService.isLoggedIn();
@@ -25,7 +37,7 @@
                 $state.go(state, params)
             };
 
-			
+
 
 
 		}

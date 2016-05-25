@@ -16,5 +16,12 @@ function service($http, serverName, $q){
 
       };
 
+      this.getStats = function(){
+        return $http({
+          url: serverName + '/api/reviews/statistics',
+          method: "GET"
+        });
+      };
+
   }
 })();
