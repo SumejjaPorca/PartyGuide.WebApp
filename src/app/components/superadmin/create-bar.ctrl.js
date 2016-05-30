@@ -7,17 +7,30 @@
 
 	/**@ngInject */
 	function createBarCtrl($scope, accountService, toastr, $timeout, $state,
-		barsService, $filter, $log, geolocation){
+		barsService, $filter, $log, geolocation, imageService){
 
-			    $scope.bar = {
-						name:"",
-						description:"",
-						location:{
-							address:"",
-							geo:["",""]
-						},
-						tags:[]
-					};
+	    $scope.bar = {
+				name:"",
+				description:"",
+				location:{
+					address:"",
+					geo:["",""]
+				},
+				tags:[]
+			};
+
+			// Image UPLOAD
+			$scope.uploader =  imageService.changeBarUploader();
+			$scope.uploader.onSuccessItem = function(fileItem, response, status, headers) {
+					if(response.name)
+						$scope.bar.image = response.name;
+	    };
+
+			$scope.getImageSrc = function(){
+				return imageService.getImageSrc($scope.bar.image);
+			}
+			// Image UPLOAD - END
+
 
 			$scope.coords = {latitude:43.9000, longitude:17.4};
 

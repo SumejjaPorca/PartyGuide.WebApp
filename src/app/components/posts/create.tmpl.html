@@ -7,7 +7,8 @@
   				<div class="form-group has-error" ng-if="errors">
   					<p class="col-lg-9 col-lg-offset-3 help-block" ng-repeat="err in errors">{{err}}</p>
   				</div>
-  				<div class="form-group" ng-class="{'has-error': rForm.title.$invalid && rForm.title.$touched}">
+
+          <div class="form-group" ng-class="{'has-error': rForm.title.$invalid && rForm.title.$touched}">
   					<label for="title" class="col-lg-3 control-label">Title</label>
   					<div class="col-lg-9">
   						<input type="text" class="form-control" ng-model="post.title"
@@ -17,7 +18,29 @@
   						<span ng-if="rForm.title.$error.required">Required.</span>
   					</p>
   				</div>
-  				<div class="form-group" ng-class="{'has-error': rForm.text.$invalid && rForm.text.$touched}">
+
+          <div class="form-group">
+
+            <div class="col-lg-9 col-lg-offset-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="isEvent"> Is Event?
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group" ng-if="isEvent">
+            <label for="text" class="col-lg-3 control-label">Date</label>
+            <datepicker ng-model="post.date" class="col-lg-9 pg-create-datepicker" min="minDate" min-date="minDate" show-weeks="false"></datepicker>
+
+            <div class="col-lg-offset-3 col-lg-3">
+              <timepicker style="margin-left:auto;margin-right:auto;p" ng-model="post.date" show-meridian="false"></timepicker>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': rForm.text.$invalid && rForm.text.$touched}">
   					<label for="text" class="col-lg-3 control-label">Text</label>
   					<div class="col-lg-9" >
   						<textarea class="form-control" ng-model="post.text"

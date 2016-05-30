@@ -7,7 +7,7 @@
         <div class="det-bar-add">{{bar.location.address}}</div>
       </header>
 
-      <div ng-if="bar.tags && bar.tags.length > 0" class="div-bar-prop-group">
+      <div class="div-bar-prop-group">
         <header>Current admins</header>
         <div ng-if="admins.length == 0"><em>No admins</em></div>
 
@@ -27,7 +27,7 @@
           <div class="btn btn-success pull-right" ng-click="save()">Save changes</div>
         </div>
       </div>
-      <div ng-if="bar.tags && bar.tags.length > 0" class="div-bar-prop-group">
+      <div class="div-bar-prop-group">
         <header>Add admin</header>
 
         <div class="form-group">

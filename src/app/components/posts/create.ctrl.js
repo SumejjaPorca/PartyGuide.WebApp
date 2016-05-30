@@ -11,9 +11,16 @@
 
 		$scope.bar = {};
     $scope.error = "";
-    $scope.post = { title:"", text:"" }
+    $scope.post = { title:"", text:"", date: new Date() }
 
-    barsService.getDetailed($stateParams.id).then(function(bar){
+		$scope.isEvent = false;
+		$scope.minDate = new Date();
+
+		$scope.datepickerOptions = {
+			showWeeks: false
+		}
+
+		barsService.getDetailed($stateParams.id).then(function(bar){
 			// maybe $scope.apply needed
 			angular.copy(bar, $scope.bar);
 		});
@@ -27,6 +34,10 @@
 
 				return;
 			};
+
+			if(!$scope.isEvent){
+				delete $scope.post.date;
+			}
 
 			postsService.create($stateParams.id, $scope.post).then(function(response){
 				toastr.success("Post created.");

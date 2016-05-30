@@ -7,9 +7,18 @@
 
 /**@ngInject */
 	function detailsCtrl($scope, accountService, $state, $stateParams, barsService,
-		 $log, $timeout, postsService, reviewsService){
+		 $log, $timeout, postsService, reviewsService, imageService){
 
 		$scope.bar = {name:"", location:{address:""}, tags: []};
+
+		// Show image
+		$scope.getImageSrc = function(){
+			var src = imageService.getImageSrc($scope.bar.image);
+
+			return src;
+		}
+		// Show Image - end
+
 		$scope.showMap = false;
 		$scope.posts = [];
 		$scope.reviews = [];

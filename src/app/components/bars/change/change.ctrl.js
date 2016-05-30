@@ -7,14 +7,27 @@
 
 	/**@ngInject */
 	function ctrl($scope, accountService, $state, $stateParams, barsService,
-		toastr, $timeout, $filter){
+		toastr, $timeout, $filter, imageService){
 
 		$scope.bar = {};
 
+		// Image UPLOAD
+		$scope.uploader =  imageService.changeBarUploader();
+		$scope.uploader.onSuccessItem = function(fileItem, response, status, headers) {
+				if(response.name)
+					$scope.bar.image = response.name;
+    };
+
+		$scope.getImageSrc = function(){
+			return imageService.getImageSrc($scope.bar.image);
+		}
+		// Image UPLOAD - END
+		
 		barsService.getDetailed($stateParams.id).then(function(bar){
 			// maybe $scope.apply needed
 			angular.copy(bar, $scope.bar);
 		});
+
 
 
 		$scope.error = "";
