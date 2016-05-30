@@ -7,15 +7,44 @@
 		.controller('HomeCtrl', homeCtrl);
 
 		/** @ngInject */
-		function homeCtrl($scope, accountService, $state, toastr, barsService){
+		function homeCtrl($scope, accountService, $state, toastr, barsService, reviewsService, postsService, $filter){
 
-			 $scope.bars = [];
-			 barsService.get().then(
-				function(bars){
-					var bars = bars.data;
-		      angular.copy(bars, $scope.bars);
-		    }
-			);
+			postsService.getStats().then(function(response){
+					angular.copy(response.data.dates, $scope.posts.labels);
+					if($scope.posts.labels.length != 0)
+					$scope.posts.labels.forEach(function(item, index){
+						$scope.posts.labels[index] = $filter('date')($scope.posts.labels[index], 'MMM dd yyyy');
+					});
+					angular.copy(response.data.counts, $scope.posts.data[0]);
+			}
+		);
+
+		accountService.getStats().then(function(response){
+				$scope.main.data[0] = response.data.count;
+		}
+		);
+		barsService.getStats().then(function(response){
+				$scope.main.data[1] = response.data.count;
+		}
+		);
+		reviewsService.getStats().then(function(response){
+				$scope.main.data[2] = response.data.count;
+		}
+		);
+
+    $scope.main = {
+			labels : ["Users", "Bars", "Reviews"],
+	    data : [0, 0, 0],
+	    type : 'Pie'
+
+		};
+
+		$scope.posts = {
+			labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+			data: [[0,0,0,0,0,0,0]],
+			series: ['Posts this week'],
+			onClick: function(){}
+		};
 
     		$scope.isLoggedIn = function(){
                 return accountService.isLoggedIn();
@@ -25,7 +54,7 @@
                 $state.go(state, params)
             };
 
-			
+
 
 
 		}

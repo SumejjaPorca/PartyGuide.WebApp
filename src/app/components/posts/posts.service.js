@@ -21,5 +21,13 @@ function service($http, serverName, $q){
         return $http.post(serverName + '/api/posts', postModel);
 
       };
+
+
+      this.getStats = function(){
+        return $http({
+          url: serverName + '/api/posts/statistics',
+          method: "GET"
+        });
+      };
   }
 })();

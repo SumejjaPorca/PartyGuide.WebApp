@@ -6,14 +6,29 @@
         <button class="btn btn-primary btn-block btn-lg" ng-click="go('login')">Log in!</button>
 
     </div>
+
 </div>
-<div ng-if="isLoggedIn()">
-
   <div class="row">
-    <h4>Bars</h4>
+    <h2>Our page statistic</h2>
+  </br>
+  </br>
+  </br>
 
-    <div><a ui-sref="bars.list">See bars</a></div>
+<div class="col-lg-5">
+  <canvas id="base" class="chart-base chart-dir" chart-type="main.type"
+chart-data="main.data" chart-labels="main.labels" chart-legend="true">
+</canvas>
+
+
+</div>
+
+<div class="col-lg-5">
+  <canvas id="line" class="chart chart-line chart-dir" chart-data="posts.data"
+chart-labels="posts.labels" chart-legend="true" chart-series="posts.series"
+chart-click="posts.onClick" >
+</canvas>
+
+</div>
+
 
   </div>
-
-</div>
