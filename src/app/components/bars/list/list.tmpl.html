@@ -44,8 +44,11 @@
         </form>
         <div  class="col-lg-12" >
           <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-            </ui-gmap-marker>
+            <div ng-repeat="marker in markers">
+              <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+              </ui-gmap-marker>
+              
+            </div>
             <ui-gmap-search-box template="searchbox.template" events="searchbox.events" ng-model="search.address" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>
           </ui-gmap-google-map>
           </div>

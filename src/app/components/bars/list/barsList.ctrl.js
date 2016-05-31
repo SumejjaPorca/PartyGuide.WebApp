@@ -27,14 +27,20 @@
             places_changed: function (searchBox) {
 
 							$timeout(function () {
+								console.log('places_changed');
 								geolocation.getLatLng($scope.search.address).then(function(response){
 									var coords = response;
-									$scope.marker.coords.latitude = coords.lat();
-									$scope.marker.coords.longitude = coords.lng();
-									$scope.map.center = $scope.marker.coords;
-									$scope.marker.options = {
+									console.log(coords);
+									$scope.markers[0].coords.latitude = coords.lat();
+									$scope.markers[0].coords.longitude = coords.lng();
+
+									$scope.search.coords.longitude = coords.lng();
+									$scope.search.coords.latitude = coords.lat();
+
+									$scope.map.center = $scope.markers[0].coords;
+									$scope.markers[0].options = {
 										draggable: true,
-										labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+										labelContent: "lat: " + $scope.markers[0].coords.latitude + ' ' + 'lon: ' + $scope.markers[0].coords.longitude,
 										labelAnchor: "100 0",
 										labelClass: "marker-labels"
 									};
@@ -48,7 +54,7 @@
 
 
 
-		$scope.marker = {
+		$scope.markers = [{
 			id: 0,
 			coords: $scope.search.coords,
 			options: { draggable: true },
@@ -57,20 +63,20 @@
 					$log.log('marker dragend');
 					var lat = marker.getPosition().lat();
 					var lon = marker.getPosition().lng();
-					$scope.search.longitude = lon;
-					$scope.search.latitude = lat;
+					$scope.search.coords.longitude = lon;
+					$scope.search.coords.latitude = lat;
 					geolocation.getAddress(lat, lon).then(function(address){
 						$scope.search.address = address;
 					});
-					$scope.marker.options = {
+					$scope.markers[0].options = {
 						draggable: true,
-						labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+						labelContent: "lat: " + $scope.markers[0].coords.latitude + ' ' + 'lon: ' + $scope.markers[0].coords.longitude,
 						labelAnchor: "100 0",
 						labelClass: "marker-labels"
 					};
 				}
 			}
-		};
+		}];
 
 
 
@@ -113,8 +119,19 @@
 		}
 
 		$scope.searchNear = function(){
-			barsService.searchNear($scope.search.latitude, $scope.search.longitude).then(function(bars){
+			$scope.markers.splice(1, $scope.markers.length - 1);
+			barsService.searchNear($scope.search.coords.latitude, $scope.search.coords.longitude).then(function(bars){
 					angular.copy(bars, $scope.bars);
+					$scope.bars.forEach(function(item, index){
+
+							$scope.markers.push({
+								id: index + 1,
+								coords: {latitude:item.location.geo[1], longitude:item.location.geo[0]},
+								options: { draggable: false },
+								events: {}
+							});
+					}
+					);
 				});
 		}
 
