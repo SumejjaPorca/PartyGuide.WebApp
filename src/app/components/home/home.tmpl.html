@@ -8,6 +8,8 @@
     </div>
 
 </div>
+
+<div ng-if="isLoggedIn()">
   <div class="row">
     <h2>Our page statistic</h2>
   </br>
@@ -15,6 +17,10 @@
   </br>
 
 <div class="col-lg-5">
+  <h4>User statistic</h4>
+  </br>
+  </br>
+  </br>
   <canvas id="base" class="chart-base chart-dir" chart-type="main.type"
 chart-data="main.data" chart-labels="main.labels" chart-legend="true">
 </canvas>
@@ -23,6 +29,10 @@ chart-data="main.data" chart-labels="main.labels" chart-legend="true">
 </div>
 
 <div class="col-lg-5">
+  <h4>Posts statistics</h4>
+  </br>
+  </br>
+  </br>
   <canvas id="line" class="chart chart-line chart-dir" chart-data="posts.data"
 chart-labels="posts.labels" chart-legend="true" chart-series="posts.series"
 chart-click="posts.onClick" >
@@ -30,5 +40,32 @@ chart-click="posts.onClick" >
 
 </div>
 
+</br>
+</br>
+</br>
+
+<div class="col-lg-5">
+  <h4>Best rated bars</h4>
+  </br>
+  </br>
+  </br>
+  <canvas id="base" class="chart-base chart-dir" chart-type="bars.type"
+  chart-data="bars.data" chart-labels="bars.labels" chart-legend="true">
+  </canvas>
+</div>
+
+<div class="col-lg-5">
+  <h4>Events</h4>
+  </br>
+  </br>
+  </br>
+  <canvas id="line" class="chart chart-line chart-dir" chart-data="events.data"
+chart-labels="events.labels" chart-legend="true" chart-series="events.series"
+chart-click="events.onClick" >
+</canvas>
+
+</div>
+
 
   </div>
+</div>
