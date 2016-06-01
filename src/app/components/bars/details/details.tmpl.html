@@ -57,6 +57,40 @@
 
         </div>
 
+        <div class="det-bar">
+          <div class="det-bar-title">Write a review</div>
+
+          <br>
+          <br>
+            <span class="col-lg-3 "></span>
+            <div class="col-lg-9">
+              <ng-rate-it class="" ng-model="rating.rate" min="0" max="5" step="1"></ng-rate-it>
+
+            </div>
+            <br>
+            <br>
+        		<form name="rForm" ng-submit="newReview()" class="form-horizontal" novalidate>
+              <fieldset>
+                <input type="hidden" name="rate" ng-model="rating.rate">
+                <div class="form-group" ng-class="{'has-error': rForm.comment.$invalid && rForm.comment.$touched}">
+        					<label for="comment" class="col-lg-3 control-label">Comment</label>
+        					<div class="col-lg-9" >
+        						<textarea class="form-control" ng-model="rating.comment"
+        							id="comment" name="comment" placeholder="Your comment here"></textarea>
+        					</div>
+                  <p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.comment.$invalid && rForm.comment.$touched">
+        						<span ng-if="rForm.comment.$error.required">Required.</span>
+        					</p>
+        				</div>
+                <div class="form-group">
+        					<div class="col-lg-9 col-lg-offset-3">
+        						<button type="submit" class="btn btn-success">Send a review</button>
+        					</div>
+        				</div>
+              </fieldset>
+            </form>
+
+        </div>
 
         <pg-post post="posts[index]" ng-if="posts.length > 0"></pg-post>
         <div ng-if="posts.length == 0">

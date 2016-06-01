@@ -16,6 +16,11 @@ function service($http, serverName, $q){
 
       };
 
+      this.create = function(barId, reviewModel){
+        reviewModel.barId = barId;
+        return $http.post(serverName + '/api/reviews', reviewModel);
+      };
+
       this.getStats = function(){
         return $http({
           url: serverName + '/api/reviews/statistics',

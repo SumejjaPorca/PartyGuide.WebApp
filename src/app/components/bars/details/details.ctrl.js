@@ -11,6 +11,33 @@
 
 		$scope.bar = {name:"", location:{address:""}, tags: []};
 
+		$scope.isLoggedIn = function(){
+						return accountService.isLoggedIn();
+				};
+
+	   $scope.rating = {};
+	   $scope.rating.rate = 3;
+		 $scope.rating.comment = '';
+
+		 $scope.newReview = function(){
+
+			 if($scope.rForm.$invalid){
+				 $scope.rForm.title.$setTouched();
+				 $scope.rForm.text.$setTouched();
+
+				 return;
+			 };
+
+			 reviewsService.create($stateParams.id, $scope.rating).then(function(response){
+				 toastr.success("Review sent.");
+
+				 $timeout(function () {
+					 $state.go('bars.details',{id:$scope.bar._id});
+				 }, 1500);
+			 }).catch(function(res){
+				 toastr.error(res.data.message, "Sending review failed")
+			 });
+		 };
 		// Show image
 		$scope.getImageSrc = function(){
 			var src = imageService.getImageSrc($scope.bar.image);
