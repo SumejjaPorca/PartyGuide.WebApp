@@ -23,7 +23,13 @@ function service($http, serverName, $q){
       };
 
 
-      this.getStats = function(){
+      this.getStats = function(events){
+        if(events)
+        return $http({
+          url: serverName + '/api/posts/statistics?events=true',
+          method: "GET"
+        });
+
         return $http({
           url: serverName + '/api/posts/statistics',
           method: "GET"
