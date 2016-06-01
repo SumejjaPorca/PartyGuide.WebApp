@@ -38,6 +38,11 @@
               </div>
           </header>
 
+          <div ng-if="bar.total" class="div-bar-prop-group">
+            <header>RATED by users</header>
+            <div>{{bar.total}}</div>
+          </div>
+
           <div ng-if="bar.description" class="div-bar-prop-group">
             <header>Description</header>
             <div>{{bar.description}}</div>

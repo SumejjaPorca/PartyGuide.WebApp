@@ -9,7 +9,7 @@
 	function detailsCtrl($scope, accountService, $state, $stateParams, barsService,
 		 $log, $timeout, postsService, reviewsService, imageService){
 
-		$scope.bar = {name:"", location:{address:""}, tags: []};
+		$scope.bar = {name:"", location:{address:""}, tags: [], total:0};
 
 		$scope.isLoggedIn = function(){
 						return accountService.isLoggedIn();
@@ -99,6 +99,12 @@
 
 		reviewsService.getByBar($stateParams.id).then(function(reviews){
 			angular.copy(reviews,$scope.reviews);
+			var total = 0;
+			reviews.forEach(function(item){
+				total = total + item.rate;
+			});
+			total = total / reviews.length;
+			$scope.bar.total = total;
 		});
 		$scope.isLoggedIn = function(){
 		   return accountService.isLoggedIn();
