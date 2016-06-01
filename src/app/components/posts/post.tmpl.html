@@ -1,10 +1,16 @@
-<div class="pg-post">
+<div class="pg-post" ng-class="{'pg-post-event':post.date}">
   <div class="container-fluid">
     <div class="row">
+      <div ng-if="post.date" class="pg-post-date">
+        <span class="glyphicon glyphicon-time"></span> {{post.date | date : "EEEE, d MMMM 'at' HH:mm"}}
+      </div>
       <header>
         <div class="pg-post-title">{{post.title}}</div>
-        <div class="pg-post-created">Created at: {{post.dateCreated | date}}</div>
+
+        <div class="pg-post-created">Posted at: {{post.dateCreated | date}}</div>
+
       </header>
+
       <p>{{post.text}}</p>
     </div>
   </div>

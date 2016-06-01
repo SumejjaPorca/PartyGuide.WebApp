@@ -5,12 +5,11 @@ angular
   .module('pg.bars')
   .service('barsService', barsService);
 
-/** @ngInject */
+/* @ngInject */
 function barsService($http, serverName, $q){
 
       this.get = function(){
         return $http.get(serverName + '/api/bars').then(function (response){return response.data;});
-
       };
 
       this.getDetailed = function(id){
@@ -31,11 +30,11 @@ function barsService($http, serverName, $q){
           url: serverName + '/api/bars/' + id + '/admins',
           method: "GET"
         }).then(function(response){return response.data;});
-      }
+      };
 
       this.delete = function(id){
         return $http.delete(serverName + '/api/bars/' + id)
-      }
+      };
 
       this.create = function(barModel){
         return $http({
@@ -43,7 +42,7 @@ function barsService($http, serverName, $q){
   				method: 'POST',
   				data: barModel
   			});
-      }
+      };
 
       this.change = function(barModel){
         return $http({
@@ -51,7 +50,7 @@ function barsService($http, serverName, $q){
   				method: 'PUT',
   				data: barModel
   			});
-      }
+      };
 
       this.changeAdmins = function(barId, adminsIds){
         return $http({
@@ -59,7 +58,7 @@ function barsService($http, serverName, $q){
   				method: 'PUT',
   				data: adminsIds
   			});
-      }
+      };
 
       this.searchByTags = function(tags){
         return $http({
@@ -67,14 +66,14 @@ function barsService($http, serverName, $q){
           method: "POST",
           data:{tags:tags}
         }).then(function(response){ return response.data; });
-      }
+      };
 
       this.searchByName = function(name){
         return $http({
           url: serverName + '/api/bars/byName/' + name,
           method: "GET"
         }).then(function(response){ return response.data; });
-      }
+      };
       this.getStats = function(){
         return $http({
           url: serverName + '/api/bars/statistics',
