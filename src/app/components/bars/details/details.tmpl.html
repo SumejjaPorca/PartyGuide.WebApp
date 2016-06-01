@@ -120,14 +120,19 @@
           </br>
             <div ng-if="reviews.length == 0"> No reviews to show.</div>
             <div ng-repeat="review in reviews">
+              <br>
               <div class="row review">
-                <header>
+                <div class="col-lg-9">
                   <div class="pg-review-author">{{review.user.username}}</div>
                   <div class="pg-review-date">{{review.dateCreated | date}}</div>
-                </header>
-                <p class="pg-review-text">{{review.comment}}</p> <span class="pg-review-rate">{{review.rate}}</span>
+                  <p class="pg-review-text">{{review.comment}}</p>
+                </div class="col-lg-3">
+                <div >
+                  <span class="pg-review-rate">{{review.rate}}</span>
                 </div>
+                  </div>
             </div>
+            <br>
           </div>
         </div>
 
