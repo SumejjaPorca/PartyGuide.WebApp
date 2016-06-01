@@ -27,8 +27,19 @@
 				$scope.main.data[1] = response.data.count;
 		}
 		);
+
 		reviewsService.getStats().then(function(response){
 				$scope.main.data[2] = response.data.count;
+		}
+		);
+
+
+		barsService.getTop().then(function(response){
+				var bars = response.data;
+				bars.forEach(function(item){
+					$scope.bars.data.push(item.total/item.num);
+					$scope.bars.labels.push(item.barName);
+				})
 		}
 		);
 
@@ -36,6 +47,13 @@
 			labels : ["Users", "Bars", "Reviews"],
 	    data : [0, 0, 0],
 	    type : 'Pie'
+
+		};
+
+		$scope.bars = {
+			labels : [],
+			data : [],
+			type : 'Pie'
 
 		};
 

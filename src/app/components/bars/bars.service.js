@@ -81,5 +81,12 @@ function barsService($http, serverName, $q){
           method: "GET"
         });
       };
+
+      this.getTop = function(){
+        return $http({
+          url: serverName + '/api/bars/top',
+          method: "GET"
+        });
+      };
   }
 })();
