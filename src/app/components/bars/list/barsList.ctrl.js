@@ -123,7 +123,7 @@
 
 		$scope.searchNear = function(){
 			$scope.markers.splice(1, $scope.markers.length - 1);
-			barsService.searchNear($scope.search.coords.latitude, $scope.search.coords.longitude).then(function(bars){
+			barsService.searchNear($scope.search.coords.longitude, $scope.search.coords.latitude).then(function(bars){
 					angular.copy(bars, $scope.bars);
 					$scope.bars.forEach(function(item, index){
 						$scope.markers.push(createRandomMarker(index + 1, item.location.geo[0], item.location.geo[1], item.name));
@@ -132,11 +132,11 @@
 				});
 		}
 
-		var createRandomMarker = function(i, latitude, longitude, label) {
+		var createRandomMarker = function(i, longitude, latitude, label) {
 
 		      var ret = {
-		        latitude: latitude,
 		        longitude: longitude,
+		        latitude: latitude,
 		        title: 'm' + i,
 						id: i,
 						options: {
