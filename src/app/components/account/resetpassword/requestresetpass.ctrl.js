@@ -6,7 +6,7 @@
 		.controller('RequestResetPassCtrl', RequestReset);
 
 	/**@ngInject */
-	function RequestReset($scope, accountService, toastr, $state, $timeout){
+	function RequestReset($scope, accountService, toastr, $state, $timeout, $translate){
 
 		$scope.reset = { email:"" };
 		$scope.errors = [];
@@ -16,14 +16,18 @@
 			angular.copy([], $scope.errors);
 
 			if($scope.rForm.$invalid){
-				toastr.error('Check form fields, some of them are invalid!', 'Invalid form' );
+				$translate(['REG.CHECK_FIELDS','REG.INVALID_FORM']).then(function(trans){
+					toastr.error(trans[0], trans[1]);
+				})
 				$scope.rForm.email.$setTouched();
 
 				return;
 			}
 
 			accountService.requestreset($scope.reset.email).then(function(response){
-				toastr.success("Reset link sent to your email.", "Check your email")
+				$translate('REG.RESET_LINK_SENT').then(function(trans){
+					toastr.success(trans)
+				});
 
 				$timeout(function(){
 					$state.go('login');
@@ -32,13 +36,20 @@
 			}, function(error){
 				if(error.data.email){
 					if(error.data.email == "required")
-						$scope.errors.push("Email is required.");
+						$translate('REG.E_REQ').then(function(trans){
+								$scope.errors.push(trans);
+						});
 
 					if(error.data.email == "wrong")
-						$scope.errors.push("Wrong email. There is no user with this email.");
-				}
+						$translate('REG.E_WRONG').then(function(trans){
+								$scope.errors.push(trans);
+						});
 
-				toastr.error(error.data.message, "Failed to send reset request.");
+				}
+				$translate('REG.RES_REQ_FAIL').then(function(trans){
+						toaster.error(trans);
+				});
+
 			});
 
 		}

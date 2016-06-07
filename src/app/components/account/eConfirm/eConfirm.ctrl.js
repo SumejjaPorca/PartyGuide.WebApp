@@ -6,13 +6,17 @@
 		.controller('eConfirmCtrl', eConfirmCtrl);
 
 	/**@ngInject */
-	function eConfirmCtrl($scope, $stateParams, accountService, toastr, $state, $timeout){
+	function eConfirmCtrl($scope, $stateParams, accountService, toastr, $state,
+												$timeout, $translate){
 
 		$scope.confirmation = {success:false};
 		$scope.errors = ""
     accountService.confirmEmail($stateParams.code).then(function(){
 
-				toastr.success("Confirmation succesful.");
+				$translate("ECONF.SUCCESS").then(function(trans){
+					toastr.success(trans);
+				})
+
 				$scope.confirmation.success = true;
 
 				$timeout(function(){
@@ -21,15 +25,22 @@
 
 			}, function(response){
 
+
 				if(response.data.token == "not valid"){
-					$scope.error = "Token expired or not valid.";
+					$translate("ECONF.TNVALID").then(function(trans){
+							$scope.error = trans;
+					})
 				}
 
 				if(response.data.token == "expired"){
-					$scope.error = "Token expired or not valid.";
+					$translate("ECONF.TEXPIREDS").then(function(trans){
+							$scope.error = trans;
+					})
 				}
 
-				toastr.error('Confirmation failed.');
+				$translate("ECONF.ERROR").then(function(trans){
+					toastr.error(trans);
+				})
 
 			});
 

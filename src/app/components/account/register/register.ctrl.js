@@ -33,7 +33,7 @@
 			accountService.register($scope.newUser).then(function(){
 				// tek poslije ovog je mijenjano. ova success poruka, i hendlanje errora
 				$translate(['REG.MAIL_SENT','REG.REG_SUCCESSFUL']).then(function(trans){
-					toastr.error(trans['REG.MAIL_SENT'], trans['REG.REG_SUCCESSFUL']);
+					toastr.success(trans['REG.MAIL_SENT'], trans['REG.REG_SUCCESSFUL']);
 				}).catch(function(err){
 					console.log(err);
 				});

@@ -6,12 +6,15 @@
 		.controller('LogoutCtrl', logoutCtrl);
 
 	/**@ngInject */
-	function logoutCtrl($scope, accountService, toastr, $state, $timeout){
+	function logoutCtrl($scope, accountService, toastr, $state, $timeout, $translate){
 
 
         accountService.logout();
 
-        toastr.success("Log out succesful.");
+				$translate('REG.LOGOUTSUC').then(function(trans){
+					toastr.success(trans);
+
+				})
 
         $timeout(function(){
             $state.go('home');

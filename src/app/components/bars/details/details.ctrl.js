@@ -9,8 +9,35 @@
 	function detailsCtrl($scope, accountService, $state, $stateParams, barsService,
 		 $log, $timeout, postsService, reviewsService, imageService){
 
-		$scope.bar = {name:"", location:{address:""}, tags: []};
+		$scope.bar = {name:"", location:{address:""}, tags: [], total:0};
 
+		$scope.isLoggedIn = function(){
+						return accountService.isLoggedIn();
+				};
+
+	   $scope.rating = {};
+	   $scope.rating.rate = 3;
+		 $scope.rating.comment = '';
+
+		 $scope.newReview = function(){
+
+			 if($scope.rForm.$invalid){
+				 $scope.rForm.title.$setTouched();
+				 $scope.rForm.text.$setTouched();
+
+				 return;
+			 };
+
+			 reviewsService.create($stateParams.id, $scope.rating).then(function(response){
+				 toastr.success("Review sent.");
+
+				 $timeout(function () {
+					 $state.go('bars.details',{id:$scope.bar._id});
+				 }, 1500);
+			 }).catch(function(res){
+				 toastr.error(res.data.message, "Sending review failed")
+			 });
+		 };
 		// Show image
 		$scope.getImageSrc = function(){
 			var src = imageService.getImageSrc($scope.bar.image);
@@ -72,6 +99,12 @@
 
 		reviewsService.getByBar($stateParams.id).then(function(reviews){
 			angular.copy(reviews,$scope.reviews);
+			var total = 0;
+			reviews.forEach(function(item){
+				total = total + item.rate;
+			});
+			total = total / reviews.length;
+			$scope.bar.total = total;
 		});
 		$scope.isLoggedIn = function(){
 		   return accountService.isLoggedIn();

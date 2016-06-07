@@ -10,7 +10,7 @@
 					<label for="username" class="col-lg-3 control-label" translate="REG.USERNAME">Username</label>
 					<div class="col-lg-9">
 						<input type="text" class="form-control" ng-model="newUser.username"
-							id="username" name="username" placeholder="Username" required>
+							id="username" name="username" placeholder="{{'REG.USERNAME' | translate}}" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.username.$invalid && rForm.username.$touched">
 						<span ng-if="rForm.username.$error.required" translate="REG.REQUIRED">Required.</span>
@@ -20,7 +20,7 @@
 					<label for="inputEmail" class="col-lg-3 control-label" translate="REG.EMAIL">Email</label>
 					<div class="col-lg-9">
 						<input type="email" class="form-control" ng-model="newUser.email"
-							id="inputEmail" name="email" placeholder="Email" required>
+							id="inputEmail" name="email" placeholder="{{'REG.EMAIL' | translate}}" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.email.$invalid && rForm.email.$touched">
 						<span ng-if="rForm.email.$error.required" translate="REG.REQUIRED">Required.</span>
@@ -31,7 +31,7 @@
 					<label for="password" class="col-lg-3 control-label" translate="REG.PASSWORD">Password</label>
 					<div class="col-lg-9" >
 						<input type="password" class="form-control" ng-model="newUser.password"
-							id="password" name="password" placeholder="Password" required ng-minlength="8">
+							id="password" name="password" placeholder="{{'REG.PASSWORD' | translate}}" required ng-minlength="8">
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.password.$invalid && rForm.password.$touched">
 						<span ng-if="rForm.password.$error.required" translate="REG.REQUIRED">Required.</span>
@@ -42,7 +42,7 @@
 					<label for="confirmPassword" class="col-lg-3 control-label" translate="REG.RPASSWORD">Repeat password:</label>
 					<div class="col-lg-9">
 						<input type="password" class="form-control" ng-model="newUser.confirmPassword" confirm-password="newUser.password"
-							id="passwordR" name="confirmPassword" placeholder="Repeat password" required>
+							id="passwordR" name="confirmPassword" placeholder="{{'REG.RPASSWORD' | translate}}" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.confirmPassword.$invalid && rForm.confirmPassword.$touched">
 						<span ng-if="rForm.confirmPassword.$error.required" translate="REG.REQUIRED">Required.</span>

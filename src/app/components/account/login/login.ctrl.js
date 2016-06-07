@@ -6,7 +6,8 @@
 		.controller('LoginCtrl', loginCtrl);
 
 	/**@ngInject */
-	function loginCtrl($scope, accountService, toastr, $state, $timeout, vcRecaptchaService){
+	function loginCtrl($scope, accountService, toastr, $state, $timeout,
+		$translate, vcRecaptchaService){
 
 		init();
     $scope.setResponse = function (response) {
@@ -42,6 +43,7 @@
 			//recaptcha validation end
 
 			if($scope.rForm.$invalid){
+
 				toastr.error('Check form fields, some of them are invalid!', 'Invalid form' )
 				$scope.rForm.username.$setTouched();
 				$scope.rForm.password.$setTouched();
@@ -97,7 +99,7 @@
 			$scope.response = null;
 			$scope.widgetId = null;
 			$scope.model = {
-											key: '6Lda3x0TAAAAAJYWCq_yhfmbDQdPl1BABVKWhfUa'
+											key: '6LeifCETAAAAADgllqdtdvv2Ej-i7r56QcweVyek'
 									};
 		}
 

@@ -1,36 +1,36 @@
 <div class="container-fluid">
   <div class="row">
-    <h3>Bars</h3>
+    <h3 translate="BAR.BARS">Bars</h3>
 
     <accordion close-others="true">
-      <accordion-group heading="Search by name">
+      <accordion-group heading="{{'BAR.LIST.S_NAMES' | translate }}">
         <form ng-submit="searchName()"class="col-md-6">
           <div class="form-group">
-            <label class="control-label" for="searchName">Enter bar's name</label>
-            <input class="form-control" id="searchName" type="text" placeholder="Bar's name" ng-model="search.name">
+            <label class="control-label" for="searchName" translate="BAR.LIST.E_BAR_NAME">Enter bar's name</label>
+            <input class="form-control" id="searchName" type="text" placeholder="{{ 'BAR.LIST.P_B_NAME' | translate}}" ng-model="search.name">
           </div>
           <div class="form-group">
             <button type="submit" class="col-md-2 btn btn-primary">
-              <span class="glyphicon glyphicon-search"></span> Search
+              <span class="glyphicon glyphicon-search"></span> <span translate="BAR.LIST.SEARCH">Search</span>
             </button>
           </div>
         </form>
       </accordion-group>
-      <accordion-group heading="Search by tags">
+      <accordion-group heading="{{'BAR.LIST.S_TAGS' | translate }}">
         <form ng-submit="searchTags()"class="col-md-6">
           <div class="form-group">
-            <label class="control-label" for="searchName">Enter tags you want search</label>
+            <label class="control-label" for="searchName" translate="BAR.LIST.E_TAGS">Enter tags you want search</label>
             <input class="form-control" id="searchName" type="text"
-            placeholder="Tags separated by space" ng-model="search.tags">
+            placeholder="{{ 'BAR.LIST.P_TAGS' | translate}}" ng-model="search.tags">
           </div>
           <div class="form-group">
             <button type="submit" class="col-md-2 btn btn-primary">
-              <span class="glyphicon glyphicon-search"></span> Search
+              <span class="glyphicon glyphicon-search"></span> <span translate="BAR.LIST.SEARCH">Search</span>
             </button>
           </div>
         </form>
       </accordion-group>
-      <accordion-group heading="Search near bar">
+      <accordion-group heading="{{'BAR.LIST.S_NEAR' | translate }}">
         <form ng-submit="searchNear()"class="col-lg-12">
 
           <div class="form-group searchbox col-lg-9" id = "searchbox">

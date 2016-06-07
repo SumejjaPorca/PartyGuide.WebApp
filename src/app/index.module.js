@@ -3,6 +3,6 @@
 
   angular
     .module('pg', ['ui.router', 'pascalprecht.translate', 'ui.bootstrap', 'pg.urls',
-    'pg.account','pg.superadmin', 'pg.bars', 'pg.users', 'pg.posts', 'angularFileUpload', 'chart.js']);
+    'pg.account','pg.superadmin', 'pg.bars', 'pg.users', 'pg.posts', 'angularFileUpload', 'chart.js', 'ngRateIt']);
 
 })();

@@ -10,7 +10,7 @@
 					<label for="username" class="col-lg-3 control-label" translate="REG.USERNAME">Username:</label>
 					<div class="col-lg-9">
 						<input type="text" class="form-control" ng-model="loginModel.username"
-							id="username" name="username" placeholder="Username" required>
+							id="username" name="username" placeholder="{{'REG.USERNAME' | translate}}" required>
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.username.$invalid && rForm.username.$touched">
 						<span ng-if="rForm.username.$error.required" translate="REG.REQUIRED">Required.</span>
@@ -20,7 +20,7 @@
 					<label for="password" class="col-lg-3 control-label" translate="REG.PASSWORD">Password:</label>
 					<div class="col-lg-9" >
 						<input type="password" class="form-control" ng-model="loginModel.password"
-							id="password" name="password" placeholder="Password" required ng-minlength="6">
+							id="password" name="password" placeholder="{{'REG.PASSWORD' | translate}}" required ng-minlength="6">
 					</div>
 					<p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.password.$invalid && rForm.password.$touched">
 						<span ng-if="rForm.password.$error.required" translate="REG.REQUIRED">Required.</span>

@@ -38,6 +38,11 @@
               </div>
           </header>
 
+          <div ng-if="bar.total" class="div-bar-prop-group">
+            <header>RATED by users</header>
+            <div>{{bar.total}}</div>
+          </div>
+
           <div ng-if="bar.description" class="div-bar-prop-group">
             <header>Description</header>
             <div>{{bar.description}}</div>
@@ -57,7 +62,41 @@
 
         </div>
 
-        
+        <div class="det-bar">
+          <div class="det-bar-title">Write a review</div>
+
+          <br>
+          <br>
+            <span class="col-lg-3 "></span>
+            <div class="col-lg-9">
+              <ng-rate-it class="" ng-model="rating.rate" min="0" max="5" step="1"></ng-rate-it>
+
+            </div>
+            <br>
+            <br>
+        		<form name="rForm" ng-submit="newReview()" class="form-horizontal" novalidate>
+              <fieldset>
+                <input type="hidden" name="rate" ng-model="rating.rate">
+                <div class="form-group" ng-class="{'has-error': rForm.comment.$invalid && rForm.comment.$touched}">
+        					<label for="comment" class="col-lg-3 control-label">Comment</label>
+        					<div class="col-lg-9" >
+        						<textarea class="form-control" ng-model="rating.comment"
+        							id="comment" name="comment" placeholder="Your comment here"></textarea>
+        					</div>
+                  <p class="col-lg-9 col-lg-offset-3 help-block" ng-if="rForm.comment.$invalid && rForm.comment.$touched">
+        						<span ng-if="rForm.comment.$error.required">Required.</span>
+        					</p>
+        				</div>
+                <div class="form-group">
+        					<div class="col-lg-9 col-lg-offset-3">
+        						<button type="submit" class="btn btn-success">Send a review</button>
+        					</div>
+        				</div>
+              </fieldset>
+            </form>
+
+        </div>
+
         <pg-post post="posts[index]" ng-if="posts.length > 0"></pg-post>
         <div ng-if="posts.length == 0">
           <div class="container-fluid">
@@ -86,14 +125,19 @@
           </br>
             <div ng-if="reviews.length == 0"> No reviews to show.</div>
             <div ng-repeat="review in reviews">
+              <br>
               <div class="row review">
-                <header>
+                <div class="col-lg-9">
                   <div class="pg-review-author">{{review.user.username}}</div>
                   <div class="pg-review-date">{{review.dateCreated | date}}</div>
-                </header>
-                <p class="pg-review-text">{{review.comment}}</p> <span class="pg-review-rate">{{review.rate}}</span>
+                  <p class="pg-review-text">{{review.comment}}</p>
+                </div class="col-lg-3">
+                <div >
+                  <span class="pg-review-rate">{{review.rate}}</span>
                 </div>
+                  </div>
             </div>
+            <br>
           </div>
         </div>
 

@@ -14,7 +14,9 @@
     "angular-translate": "~2.11.0",
     "angular-google-maps": "~2.3.2",
     "angular-file-upload": "~2.3.3",
-    "angular-chart.js": "~0.10.2"
+    "angular-chart.js": "~0.10.2",
+    "ionic-rating": "~0.3.0",
+    "angular-rateit": "~2.0.5"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"
